@@ -18,4 +18,19 @@ use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAlias;
  */
 class OgoneAlias extends BaseOgoneAlias {
 
+    public function toOgone()
+    {
+        $convertion = array(
+           'AliasOperation'=> 'Operation',
+           'AliasUsage'    => 'Label',
+           'Alias'         => 'Id',
+        );
+
+        foreach ($convertion as $ogoneKey => $propelGetter) {
+            $convertion[$ogoneKey] = $this->{'get'.$propelGetter}();
+        }
+
+        return $convertion;
+    }
+
 } // OgoneAlias

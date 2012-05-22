@@ -20,6 +20,7 @@ class ConfigurationContainer extends ParameterBag
        'CIVILITY', 'CN', 'ECOM_BILLTO_POSTAL_NAME_FIRST', 'ECOM_BILLTO_POSTAL_NAME_LAST', 'EMAIL',
        'OWNERZIP', 'OWNERADDRESS', 'OWNERADDRESS2', 'OWNERCTY', 'OWNERTOWN', 'OWNERTELNO', 'OWNERTELNO2', 'ECOM_SHIPTO_DOB',
        'ACCEPTURL', 'DECLINEURL', 'EXCEPTIONURL', 'CANCELURL', 'BACKURL',
+       'ALIASOPERATION', 'ALIAS', 'ALIASUSAGE',
     );
 
     public function __construct(array $defaults = array())

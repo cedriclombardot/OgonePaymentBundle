@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('PSPID')->end()
                         ->scalarNode('currency')->end()
                         ->scalarNode('language')->end()
+                        ->booleanNode('use_aliases')->defaultFalse()->end()
                     ->end()
                 ->end()
                 ->arrayNode('design')

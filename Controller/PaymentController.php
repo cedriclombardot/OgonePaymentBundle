@@ -5,6 +5,8 @@ namespace Cedriclombardot\OgonePaymentBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneClientQuery;
+use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasQuery;
+use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 
 class PaymentController extends Controller
 {
@@ -13,7 +15,19 @@ class PaymentController extends Controller
         $client = OgoneClientQuery::create()
                        ->filterByEmail('test@test.com')
                        ->findOneOrCreate();
+
         $client->save();
+
+        if ($this->container->getParameter('ogone.use_aliases')) {
+            $alias = OgoneAliasQuery::create()
+                       ->filterByOgoneClient($client)
+                       ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
+                       ->filterByUsage('ABONNEMENT')
+                       ->findOneOrCreate();
+
+           $alias->setLabel('Your abonnement');
+           $alias->save();
+        }
 
         $transaction = $this->get('ogone.transaction_builder')
                             ->order()
@@ -29,6 +43,11 @@ class PaymentController extends Controller
                                 ->setBackUrl($this->generateUrl('ogone_payment_feedback', array(), true))
                             ->end()
                             ;
+
+        if ($this->container->getParameter('ogone.use_aliases')) {
+            $transaction->useAlias($alias);
+        }
+
         $form = $transaction->getForm();
 
         return $this->render(

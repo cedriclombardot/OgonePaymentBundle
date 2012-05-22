@@ -44,6 +44,7 @@ class TransactionFormBuilderTest extends TestCase
         $this->assertTrue($this->builder->getForm()->has('SHASign'));
         $this->assertEquals('', $this->builder->getForm()->getName());
     }
+
 }
 
 class TransactionFormBuilderMock extends TransactionFormBuilder

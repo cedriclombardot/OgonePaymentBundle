@@ -21,6 +21,9 @@ class CedriclombardotOgonePaymentExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
+        $container->setParameter('ogone.use_aliases', $config['general']['use_aliases']);
+        unset($config['general']['use_aliases']);
+
         $container->setParameter('ogone.configuration.defaults', array_merge($config['general'], $config['design']));
         $container->setParameter('ogone.configuration.secure', $config['secret']);
     }

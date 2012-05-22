@@ -188,6 +188,7 @@
     <parameter key="ogone.transaction_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionBuilder</parameter>
     <parameter key="ogone.transaction_form_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
     <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
+    <parameter key="ogone.use_aliases">false</parameter>
     <parameter key="ogone.configuration.defaults" type="collection">
       <parameter key="PSPID">MyCompagny</parameter>
       <parameter key="currency">EUR</parameter>

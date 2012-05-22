@@ -1,5 +1,16 @@
 # Ogone payment bundle, help you to make payment tractions with ogone and Symfony2 ![project status](http://stillmaintained.com/cedriclombardot/OgonePaymentBundle.png)# ![build status](https://secure.travis-ci.org/cedriclombardot/OgonePaymentBundle.png)#
 
+## Features
+
+* Full featured sample controller
+* Simple transactions
+* Feedback managment
+* Alias managment
+
+## Comming
+
+* Batch operations
+
 ## Setup
 
 Add in your composer.json :
@@ -97,4 +108,45 @@ And the feedback :
     }
 
 ```
+
+## Alias managment
+
+You have Ogone premium account with alias option :
+
+Edit config.yml
+
+``` yaml
+cedriclombardot_ogone_payment:
+    general:
+        use_aliases: true
+```
+In your transaction controller
+
+``` php
+// Client recuperation HERE
+
+// Alias creation
+if ($this->container->getParameter('ogone.use_aliases')) {
+    $alias = OgoneAliasQuery::create()
+               ->filterByOgoneClient($client)
+               ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
+               ->filterByUsage('ABONNEMENT')
+               ->findOneOrCreate();
+
+   $alias->setLabel('Your abonnement');
+   $alias->save();
+}
+
+// Transaction creation HERE
+
+if ($this->container->getParameter('ogone.use_aliases')) {
+    $transaction->useAlias($alias);
+}
+
+$form = $transaction->getForm();
+
+// call the view
+```
+
+See a complete controller implementation here [https://github.com/cedriclombardot/OgonePaymentBundle/blob/master/Controller/PaymentController.php](https://github.com/cedriclombardot/OgonePaymentBundle/blob/master/Controller/PaymentController.php)
 

@@ -1905,6 +1905,7 @@ class TestsTestDebugProjectContainer extends Container
             'ogone.transaction_builder.class' => 'Cedriclombardot\\OgonePaymentBundle\\Builder\\TransactionBuilder',
             'ogone.transaction_form_builder.class' => 'Cedriclombardot\\OgonePaymentBundle\\Builder\\TransactionFormBuilder',
             'ogone.feedbacker.class' => 'Cedriclombardot\\OgonePaymentBundle\\Feedback\\TransactionFeedbacker',
+            'ogone.use_aliases' => false,
             'ogone.configuration.defaults' => array(
                 'PSPID' => 'MyCompagny',
                 'currency' => 'EUR',

@@ -71,6 +71,8 @@
         <column name="phone_number" required="false" type="varchar" size="30" />
         <column name="phone_number2" required="false" type="varchar" size="30" />
         <column name="birthdate" required="false" type="date" />
+
+        <behavior name="timestampable" />
     </table>
 
     <table name="ogone_alias">
@@ -83,6 +85,8 @@
         <foreign-key foreignTable="ogone_client" onUpdate="cascade" onDelete="cascade">
             <reference local="client_id" foreign="id" />
         </foreign-key>
+
+        <behavior name="timestampable" />
     </table>
 
 </database>

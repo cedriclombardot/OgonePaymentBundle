@@ -5,6 +5,7 @@ namespace Cedriclombardot\OgonePaymentBundle\Builder;
 use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrder;
+use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAlias;
 
 class TransactionBuilder
 {
@@ -42,6 +43,15 @@ class TransactionBuilder
     protected function prepareTransaction()
     {
         foreach ($this->order->toOgone() as $key => $value) {
+            $this->configurationContainer->{'set'.$key}($value);
+        }
+
+        return $this;
+    }
+
+    public function useAlias(OgoneAlias $alias)
+    {
+        foreach ($alias->toOgone() as $key => $value) {
             $this->configurationContainer->{'set'.$key}($value);
         }
 
