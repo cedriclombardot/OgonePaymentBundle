@@ -1,4 +1,4 @@
-# Ogone payment bundle, help you to make payment tractions with ogone and Symfony2 ![project status](http://stillmaintained.com/cedriclombardot/OgonePaymentBundle.png)# ![build status](https://secure.travis-ci.org/cedriclombardot/OgonePaymentBundle.png)#
+# Ogone payment bundle, help you to make payment transactions with ogone and Symfony2 ![project status](http://stillmaintained.com/cedriclombardot/OgonePaymentBundle.png)# ![build status](https://secure.travis-ci.org/cedriclombardot/OgonePaymentBundle.png)#
 
 ## Features
 
