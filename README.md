@@ -79,3 +79,22 @@ return $this->render(
 ```
 
 
+And the feedback :
+
+``` php
+<?php
+    public function feedbackAction()
+    {
+        if (!$this->get('ogone.feedbacker')->isValidCall()) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->get('ogone.feedbacker')->updateOrder();
+
+        return $this->render(
+            'CedriclombardotOgonePaymentBundle:Payment:feedback.html.twig'
+        );
+    }
+
+```
+
