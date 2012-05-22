@@ -3,3 +3,5 @@ Propel/map/*
 vendor/
 Tests/build/
 Tests/schema.xml
+composer.phar
+composer.lock
