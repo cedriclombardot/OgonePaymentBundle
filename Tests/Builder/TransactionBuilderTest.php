@@ -19,7 +19,7 @@ class TransactionBuilderTest extends TestCase
 
     public function setUp()
     {
-        $formFactory = new FormFactory(array(0 => new DependencyInjectionExtension($this->getContainer(), array('field' => 'form.type.field', 'form' => 'form.type.form','hidden' => 'form.type.hidden', ), array('form' => array(0 => 'form.type_extension.field', 1 => 'form.type_extension.csrf')), array(0 => 'form.type_guesser.validator'))));
+        $formFactory = new FormFactory(array(0 => new DependencyInjectionExtension($this->getContainer(), array('field' => 'form.type.field', 'form' => 'form.type.form','hidden' => 'form.type.hidden', ), array('form' => array()), array(0 => 'form.type_guesser.validator'))));
         $secureConfigurationContainer = new SecureConfigurationContainer(array('shaInKey' => 'testHash', 'algorithm' => 'sha512'));
         $configurationContainer = new ConfigurationContainer(array());
 
