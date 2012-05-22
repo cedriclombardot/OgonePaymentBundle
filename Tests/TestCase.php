@@ -6,6 +6,8 @@ namespace Cedriclombardot\OgonePaymentBundle\Tests;
 class TestCase extends \PHPUnit_Framework_TestCase
 {
     static $kernel;
+    
+    static $isBuilt = false;
 
     public function getContainer()
     {
@@ -19,6 +21,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
         return self::$kernel;
     }
+    
 }
 
 

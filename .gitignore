@@ -1,3 +1,5 @@
 Propel/om/*
 Propel/map/*
 vendor/
+Tests/build/
+Tests/schema.xml

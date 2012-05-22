@@ -25,8 +25,8 @@ class PaymentController extends Controller
                        ->filterByUsage('ABONNEMENT')
                        ->findOneOrCreate();
 
-           $alias->setLabel('Your abonnement');
-           $alias->save();
+             $alias->setLabel('Your abonnement');
+             $alias->save();
         }
 
         $transaction = $this->get('ogone.transaction_builder')
