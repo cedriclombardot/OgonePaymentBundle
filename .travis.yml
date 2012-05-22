@@ -10,7 +10,7 @@ env:
 before_script:
     - curl -s http://getcomposer.org/installer | php
     - php composer.phar --dev install
-    - cd Tests && sh reset_test.sh
+    - cd Tests && sh reset_tests.sh
 
 script: phpunit
 
