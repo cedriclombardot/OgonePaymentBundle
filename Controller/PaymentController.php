@@ -22,7 +22,7 @@ class PaymentController extends Controller
             $alias = OgoneAliasQuery::create()
                        ->filterByOgoneClient($client)
                        ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
-                       ->filterByUsage('ABONNEMENT')
+                       ->filterByName('ABONNEMENT')
                        ->findOneOrCreate();
 
              $alias->setLabel('Your abonnement');

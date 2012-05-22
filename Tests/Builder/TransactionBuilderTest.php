@@ -30,7 +30,7 @@ class TransactionBuilderTest extends TestCase
     public function testUseAlias()
     {
         $alias = new OgoneAlias();
-        $alias->setUsage('USAGE');
+        $alias->setName('USAGE');
         $alias->setOperation(OgoneAliasPeer::OPERATION_BYMERCHANT);
         $alias->setLabel('LABEL');
 

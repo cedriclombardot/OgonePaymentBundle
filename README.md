@@ -130,7 +130,7 @@ if ($this->container->getParameter('ogone.use_aliases')) {
     $alias = OgoneAliasQuery::create()
                ->filterByOgoneClient($client)
                ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
-               ->filterByUsage('ABONNEMENT')
+               ->filterByName('ABONNEMENT')
                ->findOneOrCreate();
 
    $alias->setLabel('Your abonnement');
