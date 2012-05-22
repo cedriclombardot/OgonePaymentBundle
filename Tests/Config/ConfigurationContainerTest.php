@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Cedriclombardot\OgonePaymentBundle\Tests\Config;
 
@@ -7,38 +7,38 @@ use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
 
 class ConfigurationContainerTest extends TestCase
 {
-	public function testFindProperty()
-	{
-		$config = new ConfigurationContainer;
-		
-		$this->assertEquals('TITLE', $config->findProperty('TITLE'));
-		$this->assertEquals('TITLE', $config->findProperty('title'));
-		$this->assertEquals('TITLE', $config->findProperty('Title'));
-		
-		$this->assertFalse($config->findProperty('Unknown'));
-	}
-	
-	public function testSetProperty()
-	{
-		$config = new ConfigurationContainer;
-		
-		$config->setTitle('test');
-		$this->assertEquals('test', $config->get('TITLE'));
-	}
-	
+    public function testFindProperty()
+    {
+        $config = new ConfigurationContainer;
+
+        $this->assertEquals('TITLE', $config->findProperty('TITLE'));
+        $this->assertEquals('TITLE', $config->findProperty('title'));
+        $this->assertEquals('TITLE', $config->findProperty('Title'));
+
+        $this->assertFalse($config->findProperty('Unknown'));
+    }
+
+    public function testSetProperty()
+    {
+        $config = new ConfigurationContainer;
+
+        $config->setTitle('test');
+        $this->assertEquals('test', $config->get('TITLE'));
+    }
+
     public function testGetProperty()
     {
         $config = new ConfigurationContainer;
-        
+
         $config->setTitle('test');
         $this->assertEquals('test', $config->getTitle());
     }
-    
+
     public function testDefaultProperties()
     {
         $config = new ConfigurationContainer(array('title' =>'demo'));
-        
+
         $this->assertEquals('demo', $config->getTitle());
     }
-    
+
 }

@@ -76,7 +76,7 @@ class OgoneOrder extends BaseOgoneOrder {
         }
 
         if ($this->getOgoneClient()) {
-           	$convertion = array_merge($convertion, $this->getOgoneClient()->toOgone());
+               $convertion = array_merge($convertion, $this->getOgoneClient()->toOgone());
         }
 
         return $convertion;

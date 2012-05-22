@@ -5,13 +5,13 @@ namespace Cedriclombardot\OgonePaymentBundle\Tests;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
-	static $kernel;
-	
+    static $kernel;
+
     public function getContainer()
     {
         return $this->getBootedKernel()->getContainer();
     }
-    
+
     protected function getBootedKernel()
     {
         self::$kernel = new MyKernel('test', true);
@@ -29,13 +29,13 @@ class MyKernel extends \Symfony\Component\HttpKernel\Kernel
         return array(
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
-            
+
             // Propel
             new \Propel\PropelBundle\PropelBundle(),
-            
+
             // Ogone
             new \Cedriclombardot\OgonePaymentBundle\CedriclombardotOgonePaymentBundle(),
-            
+
         );
     }
 
