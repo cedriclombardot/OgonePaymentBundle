@@ -1,0 +1,72 @@
+{
+    "hash": "18117260b6a73eae32c3a56014c3f351",
+    "packages": [
+        {
+            "package": "doctrine/common",
+            "version": "dev-master",
+            "source-reference": "f8e2aadf388ab1e6b36263a73d5e314c477f96c7"
+        },
+        {
+            "package": "doctrine/common",
+            "version": "dev-master",
+            "source-reference": "f8e2aadf388ab1e6b36263a73d5e314c477f96c7",
+            "alias-pretty-version": "2.3.x-dev",
+            "alias-version": "2.3.9999999.9999999-dev"
+        },
+        {
+            "package": "phing/phing",
+            "version": "2.4.12"
+        },
+        {
+            "package": "propel/propel-bundle",
+            "version": "1.1.x-dev",
+            "source-reference": "f675e3982e4f9e45d7a312bef5d837c970b0f1de"
+        },
+        {
+            "package": "propel/propel1",
+            "version": "dev-master",
+            "source-reference": "7f8f58779902ed0dfa4e3c6e7233caa1b4d93b49"
+        },
+        {
+            "package": "propel/propel1",
+            "version": "dev-master",
+            "source-reference": "7f8f58779902ed0dfa4e3c6e7233caa1b4d93b49",
+            "alias-pretty-version": "1.6.x-dev",
+            "alias-version": "1.6.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/symfony",
+            "version": "dev-master",
+            "source-reference": "335d4eab86362a249e4c58d28320b7b843773492"
+        },
+        {
+            "package": "symfony/symfony",
+            "version": "dev-master",
+            "source-reference": "335d4eab86362a249e4c58d28320b7b843773492",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "0fa26d642994630b2ec19c090149fa56ce84c789"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "0fa26d642994630b2ec19c090149fa56ce84c789",
+            "alias-pretty-version": "1.8.x-dev",
+            "alias-version": "1.8.9999999.9999999-dev"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ]
+}

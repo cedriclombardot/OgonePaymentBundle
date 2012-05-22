@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="ogone.configuration.class">Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer</parameter>
+        <parameter key="ogone.secure_configuration.class">Cedriclombardot\OgonePaymentBundle\Config\SecureConfigurationContainer</parameter>
+        <parameter key="ogone.transaction_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionBuilder</parameter>
+        <parameter key="ogone.transaction_form_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
+        <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
+    </parameters>
+
+    <services>
+        <service id="ogone.configuration" class="%ogone.configuration.class%" public="true">
+            <argument>%ogone.configuration.defaults%</argument>
+        </service>
+
+        <service id="ogone.secure_configuration" class="%ogone.secure_configuration.class%" public="false">
+            <argument>%ogone.configuration.secure%</argument>
+        </service>
+
+        <service id="ogone.transaction_builder" class="%ogone.transaction_builder.class%" public="true">
+            <argument type="service" id="ogone.transaction_form_builder" />
+            <argument type="service" id="ogone.configuration" />
+        </service>
+
+        <service id="ogone.transaction_form_builder" class="%ogone.transaction_form_builder.class%" public="false">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="ogone.secure_configuration" />
+        </service>
+
+        <service id="ogone.feedbacker" class="%ogone.feedbacker.class%" public="true" scope="request">
+            <argument type="service" id="request" />
+            <argument type="service" id="ogone.secure_configuration" />
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,29 @@
+framework:
+    #esi:             ~
+    secret:          SecretKeyForTests
+    charset:         UTF-8
+    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    session:
+        auto_start:     true
+        
+cedriclombardot_ogone_payment:
+    secret:
+        shaInKey: Mysecretsig1875!?
+        shaOutKey: Mysecretsig1875!?
+        algorithm: sha512
+    general:
+        PSPID: MyCompagny
+        currency: EUR
+        language: fr_FR
+    design:
+        title: MyCompagny
+        bgColor: "#4e84c4"
+        txtColor: "#FFFFFF"
+        tblBgColor: "#FFFFFF"
+        buttonBgColor: "#00467F"
+        buttonTxtColor: "#FFFFFF"
+        fontType: "Verdana"
