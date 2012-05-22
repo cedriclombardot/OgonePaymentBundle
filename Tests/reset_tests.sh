@@ -2,4 +2,5 @@
 
 CURRENT=`pwd`
 cp $CURRENT/../Resources/config/schema.xml ./
-PHP_CLASSPATH="$CURRENT/../vendor/phing/phing/classes/" ../vendor/propel/propel1/generator/bin/propel-gen 
+chmod +x "$CURRENT/../vendor/phing/phing/bin/phing"
+PHING_COMMAND="$CURRENT/../vendor/phing/phing/bin/phing" PHP_CLASSPATH="$CURRENT/../vendor/phing/phing/classes/" ../vendor/propel/propel1/generator/bin/propel-gen 
