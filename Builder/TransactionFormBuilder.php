@@ -18,7 +18,7 @@ class TransactionFormBuilder
     {
         $this->formFactory = $formFactory;
         $this->form = $this->formFactory
-                           ->createNamedBuilder('form', null);
+                           ->createNamedBuilder(null, 'form');
 
         $this->secureConfigurationContainer = $secureConfigurationContainer;
     }
