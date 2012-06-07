@@ -4,7 +4,6 @@ namespace Cedriclombardot\OgonePaymentBundle\Propel;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAlias;
 
-
 /**
  * Skeleton subclass for representing a row from the 'ogone_alias' table.
  *
@@ -16,8 +15,8 @@ use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAlias;
  *
  * @package    propel.generator.src.Cedriclombardot.OgonePaymentBundle.Propel
  */
-class OgoneAlias extends BaseOgoneAlias {
-
+class OgoneAlias extends BaseOgoneAlias
+{
     public function toOgone()
     {
         $convertion = array(

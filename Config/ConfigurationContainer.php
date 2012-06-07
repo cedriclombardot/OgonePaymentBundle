@@ -69,7 +69,6 @@ class ConfigurationContainer extends ParameterBag
         }
     }
 
-
     public function findProperty($name)
     {
         if (in_array(strtoupper($name), $this->properties)) {

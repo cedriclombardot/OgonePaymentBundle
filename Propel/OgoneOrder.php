@@ -17,8 +17,8 @@ use Cedriclombardot\OgonePaymentBundle\Propel\OgoneClient;
  *
  * @package    propel.generator.src.Cedriclombardot.OgonePaymentBundle.Propel
  */
-class OgoneOrder extends BaseOgoneOrder {
-
+class OgoneOrder extends BaseOgoneOrder
+{
     protected $onEnd;
 
     public function setClient(OgoneClient $client)

@@ -4,7 +4,6 @@ namespace Cedriclombardot\OgonePaymentBundle\Propel;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAliasQuery;
 
-
 /**
  * Skeleton subclass for performing query and update operations on the 'ogone_alias' table.
  *
@@ -16,6 +15,6 @@ use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAliasQuery;
  *
  * @package    propel.generator.src.Cedriclombardot.OgonePaymentBundle.Propel
  */
-class OgoneAliasQuery extends BaseOgoneAliasQuery {
-
+class OgoneAliasQuery extends BaseOgoneAliasQuery
+{
 } // OgoneAliasQuery

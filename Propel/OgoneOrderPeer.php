@@ -4,7 +4,6 @@ namespace Cedriclombardot\OgonePaymentBundle\Propel;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneOrderPeer;
 
-
 /**
  * Skeleton subclass for performing query and update operations on the 'ogone_order' table.
  *
@@ -16,6 +15,6 @@ use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneOrderPeer;
  *
  * @package    propel.generator.src.Cedriclombardot.OgonePaymentBundle.Propel
  */
-class OgoneOrderPeer extends BaseOgoneOrderPeer {
-
+class OgoneOrderPeer extends BaseOgoneOrderPeer
+{
 } // OgoneOrderPeer

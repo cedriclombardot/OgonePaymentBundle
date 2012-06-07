@@ -10,6 +10,9 @@
         <parameter key="ogone.transaction_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionBuilder</parameter>
         <parameter key="ogone.transaction_form_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
         <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
+        <parameter key="ogone.batchs_url">https://secure.ogone.com/ncol/test/payment_download_ncp.asp</parameter>
+        <parameter key="ogone.alias_manager.class">Cedriclombardot\OgonePaymentBundle\Manager\AliasManager</parameter>
+        <parameter key="ogone.batch_api.class">Cedriclombardot\OgonePaymentBundle\Manager\Api</parameter>
     </parameters>
 
     <services>
@@ -35,6 +38,16 @@
             <argument type="service" id="request" />
             <argument type="service" id="ogone.secure_configuration" />
         </service>
+
+        <service id="ogone.batch_api" class="%ogone.batch_api.class%" public="false">
+            <argument type="service" id="ogone.configuration" />
+            <argument type="service" id="ogone.secure_configuration" />
+        </service>
+
+        <service id="ogone.alias_manager" class="%ogone.alias_manager.class%" public="true">
+            <argument type="service" id="ogone.batch_api" />
+        </service>
+
 
     </services>
 </container>

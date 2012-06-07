@@ -4,7 +4,6 @@ namespace Cedriclombardot\OgonePaymentBundle\Propel;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneClientQuery;
 
-
 /**
  * Skeleton subclass for performing query and update operations on the 'ogone_client' table.
  *
@@ -16,6 +15,6 @@ use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneClientQuery;
  *
  * @package    propel.generator.src.Cedriclombardot.OgonePaymentBundle.Propel
  */
-class OgoneClientQuery extends BaseOgoneClientQuery {
-
+class OgoneClientQuery extends BaseOgoneClientQuery
+{
 } // OgoneClientQuery

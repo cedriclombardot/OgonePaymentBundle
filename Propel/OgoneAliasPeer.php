@@ -4,7 +4,6 @@ namespace Cedriclombardot\OgonePaymentBundle\Propel;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAliasPeer;
 
-
 /**
  * Skeleton subclass for performing query and update operations on the 'ogone_alias' table.
  *
@@ -16,6 +15,6 @@ use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAliasPeer;
  *
  * @package    propel.generator.src.Cedriclombardot.OgonePaymentBundle.Propel
  */
-class OgoneAliasPeer extends BaseOgoneAliasPeer {
-
+class OgoneAliasPeer extends BaseOgoneAliasPeer
+{
 } // OgoneAliasPeer

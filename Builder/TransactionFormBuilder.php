@@ -30,8 +30,7 @@ class TransactionFormBuilder
 
     public function build(ConfigurationContainer $configurationContainer)
     {
-        foreach ($configurationContainer->all() as $key => $value)
-        {
+        foreach ($configurationContainer->all() as $key => $value) {
             $this->form->add($configurationContainer->findProperty($key), 'hidden', array('data' => $value));
         }
 
