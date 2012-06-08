@@ -10,11 +10,14 @@
         <parameter key="ogone.transaction_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionBuilder</parameter>
         <parameter key="ogone.transaction_form_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
         <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
+        <parameter key="ogone.template_route">ogone_template</parameter>
     </parameters>
 
     <services>
         <service id="ogone.configuration" class="%ogone.configuration.class%" public="true">
             <argument>%ogone.configuration.defaults%</argument>
+            <argument type="service" id="router" />
+            <argument>%ogone.template_route%</argument>
         </service>
 
         <service id="ogone.secure_configuration" class="%ogone.secure_configuration.class%" public="false">

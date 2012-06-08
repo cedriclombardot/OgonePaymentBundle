@@ -1,0 +1,3 @@
+ogone_template:
+    pattern: /ogone/template/{twigPath}
+    defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:renderTemplate }

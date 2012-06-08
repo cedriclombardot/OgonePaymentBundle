@@ -5,3 +5,7 @@ ogone_payment_form:
 ogone_payment_feedback:
     pattern: /ogone/payment-feedback
     defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:feedback }
+
+ogone_template:
+    pattern: /ogone/template/{twigPath}
+    defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:renderTemplate }

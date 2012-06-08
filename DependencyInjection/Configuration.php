@@ -50,6 +50,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('buttonBgColor')->end()
                         ->scalarNode('buttonTxtColor')->end()
                         ->scalarNode('fontType')->end()
+                        ->scalarNode('template')->end()
                     ->end()
                 ->end()
             ->end();

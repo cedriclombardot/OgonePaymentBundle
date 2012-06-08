@@ -70,4 +70,11 @@ class PaymentController extends Controller
             'CedriclombardotOgonePaymentBundle:Payment:feedback.html.twig'
         );
     }
+    
+    public function renderTemplateAction($twigPath)
+    {
+    	return $this->render(
+            $twigPath
+        );
+    }
 }
