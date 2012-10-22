@@ -25,6 +25,12 @@ class CedriclombardotOgonePaymentExtension extends Extension
         $container->setParameter('ogone.env', $config['general']['env']);
         unset($config['general']['env']);
 
+        if (count($config['general']['brands']) == 0) {
+            $config['general']['brands'] = array('VISA', 'MasterCard');
+        }
+        $container->setParameter('ogone.brands', $config['general']['brands']);
+        unset($config['general']['brands']);
+
         $container->setParameter('ogone.configuration.defaults', array_merge($config['general'], $config['design']));
         $container->setParameter('ogone.configuration.secure', $config['secret']);
     }

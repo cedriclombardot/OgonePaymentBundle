@@ -5,9 +5,20 @@ namespace Cedriclombardot\OgonePaymentBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 
+use Symfony\Component\Form\CallbackValidator;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Translation\TranslatorInterface;
+
 class AliasType extends AbstractType
 {
-    protected $brands = array('VISA');
+    protected $translator;
+
+    public function __construct(TranslatorInterface $translator, array $brands)
+    {
+        $this->translator = $translator;
+        $this->brands = $brands;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,6 +44,15 @@ class AliasType extends AbstractType
             'required' => true,
         ))
         ;
+
+        $translator = $this->translator;
+
+        $builder->addValidator(new CallbackValidator(function(FormInterface $form) use ($translator) {
+            if ($form->get('date_year')->getData().$form->get('date_month')->getData() < date('ym')) {
+                $form->get('date_month')->addError( new FormError( $translator->trans("alias.date_expired", array(), 'ogone') ) );
+            }
+
+        }));
     }
 
     public function getName()

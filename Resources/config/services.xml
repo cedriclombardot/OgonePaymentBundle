@@ -54,6 +54,8 @@
         </service>
 
         <service id="ogone.alias_form" class="%ogone.alias_form.class%" public="true">
+            <argument type="service" id="translator" />
+            <argument>%ogone.brands%</argument>
         </service>
 
     </services>
