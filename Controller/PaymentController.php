@@ -8,6 +8,8 @@ use Cedriclombardot\OgonePaymentBundle\Propel\OgoneClientQuery;
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasQuery;
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class PaymentController extends Controller
 {
     public function indexAction()
@@ -25,7 +27,6 @@ class PaymentController extends Controller
                        ->filterByName('ABONNEMENT')
                        ->findOneOrCreate();
 
-             $alias->setLabel('Your abonnement');
              $alias->save();
         }
 
@@ -70,11 +71,60 @@ class PaymentController extends Controller
             'CedriclombardotOgonePaymentBundle:Payment:feedback.html.twig'
         );
     }
-    
+
     public function renderTemplateAction($twigPath)
     {
-    	return $this->render(
+        return $this->render(
             $twigPath
         );
+    }
+
+    /**
+    * Demo for add an alias through a batch action
+    */
+    public function batchAliasAction()
+    {
+        $client = OgoneClientQuery::create()
+               ->filterByEmail('test@test.com')
+               ->findOneOrCreate();
+
+        $client->setFirstname('John');
+        $client->setFullname('Doe');
+        $client->save();
+
+        $alias = OgoneAliasQuery::create()
+                       ->filterByOgoneClient($client)
+                       ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
+                       ->filterByName('ABONNEMENT')
+                       ->findOneOrCreate();
+
+        $alias->save();
+
+        try {
+
+            $response = $this->get('ogone.batch_alias_manager')
+                ->addAlias(
+                    $alias->getUuid(),
+                    $client->getFirstname().' '.$client->getFullName(),
+                    '4111222111111111',
+                    '1112',
+                    'VISA'
+                );
+
+            return new Response($response->getContent(), 200, array('content-type' => 'text/xml'));
+
+        } catch (\Cedriclombardot\OgonePaymentBundle\Exception\InvalidBatchDatasException $e) {
+            $xml = '<ERRORS>';
+
+            foreach ($e->getErrors() as $error) {
+                $xml .= '<ERROR>'.$error->asXml().'</ERROR>';
+            }
+
+            $xml .= '</ERRORS>';
+
+            return new Response($xml, 400, array('content-type' => 'text/xml'));
+
+        }
+
     }
 }

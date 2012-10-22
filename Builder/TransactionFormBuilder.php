@@ -30,8 +30,11 @@ class TransactionFormBuilder
 
     public function build(ConfigurationContainer $configurationContainer)
     {
-        foreach ($configurationContainer->all() as $key => $value)
-        {
+        foreach ($configurationContainer->all() as $key => $value) {
+            if ($value instanceof \DateTime) {
+                $value = $value->format('Y-m-d');
+            }
+
             $this->form->add($configurationContainer->findProperty($key), 'hidden', array('data' => $value));
         }
 
@@ -52,6 +55,10 @@ class TransactionFormBuilder
         ksort($properties);
 
         foreach ($properties as $key => $val) {
+            if ($val instanceof \DateTime) {
+                $val = $val->format('Y-m-d');
+            }
+
             $toHash .= strtoupper($key).'='.$val.$this->secureConfigurationContainer->getShaInKey();
         }
 

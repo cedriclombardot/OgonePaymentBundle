@@ -9,3 +9,7 @@ ogone_payment_feedback:
 ogone_template:
     pattern: /ogone/template/{twigPath}
     defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:renderTemplate }
+
+ogone_batchAlias:
+    pattern: /ogone/batchAlias
+    defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:batchAlias }

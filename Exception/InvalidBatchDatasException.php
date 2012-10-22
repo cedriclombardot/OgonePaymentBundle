@@ -1,0 +1,21 @@
+<?php
+
+namespace Cedriclombardot\OgonePaymentBundle\Exception;
+
+class InvalidBatchDatasException extends \InvalidArgumentException
+{
+    protected $errors = array();
+
+    public function __construct($message, $code  = 0, \Exception $previous = NULL)
+    {
+        $this->errors = $message;
+
+        return parent::__construct('Error processing batch ', $code, $previous);    
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+}

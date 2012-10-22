@@ -2,7 +2,6 @@
 
 namespace Cedriclombardot\OgonePaymentBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -31,6 +30,8 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('shaInKey')->end()
                         ->scalarNode('shaOutKey')->end()
                         ->scalarNode('algorithm')->defaultValue('sha1')->end()
+                        ->scalarNode('userId')->end()
+                        ->scalarNode('userPassword')->end()
                     ->end()
                 ->end()
                 ->arrayNode('general')
@@ -39,6 +40,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('currency')->end()
                         ->scalarNode('language')->end()
                         ->booleanNode('use_aliases')->defaultFalse()->end()
+                        ->scalarNode('env')->defaultValue('test')->end()
                     ->end()
                 ->end()
                 ->arrayNode('design')

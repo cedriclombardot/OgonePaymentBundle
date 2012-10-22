@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Cedriclombardot\OgonePaymentBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -8,7 +7,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
-
 
 class CedriclombardotOgonePaymentExtension extends Extension
 {
@@ -23,6 +21,9 @@ class CedriclombardotOgonePaymentExtension extends Extension
 
         $container->setParameter('ogone.use_aliases', $config['general']['use_aliases']);
         unset($config['general']['use_aliases']);
+
+        $container->setParameter('ogone.env', $config['general']['env']);
+        unset($config['general']['env']);
 
         $container->setParameter('ogone.configuration.defaults', array_merge($config['general'], $config['design']));
         $container->setParameter('ogone.configuration.secure', $config['secret']);

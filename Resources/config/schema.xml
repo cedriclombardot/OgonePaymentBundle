@@ -78,7 +78,7 @@
     <table name="ogone_alias">
         <column name="id"  type="integer" required="true" primaryKey="true" autoIncrement="true" />
         <column name="client_id" required="true" type="integer" />
-        <column name="label" type="varchar" size="255" required="true" primaryString="true" />
+        <column name="uuid" type="varchar" size="255" required="true" primaryString="true" />
         <column name="name" type="varchar" size="255" required="false" />
         <column name="operation" type="ENUM" valueSet="BYMERCHANT, BYPSP" required="true" />
 

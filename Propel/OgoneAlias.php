@@ -4,7 +4,6 @@ namespace Cedriclombardot\OgonePaymentBundle\Propel;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAlias;
 
-
 /**
  * Skeleton subclass for representing a row from the 'ogone_alias' table.
  *
@@ -16,14 +15,13 @@ use Cedriclombardot\OgonePaymentBundle\Propel\om\BaseOgoneAlias;
  *
  * @package    propel.generator.src.Cedriclombardot.OgonePaymentBundle.Propel
  */
-class OgoneAlias extends BaseOgoneAlias {
-
+class OgoneAlias extends BaseOgoneAlias
+{
     public function toOgone()
     {
         $convertion = array(
            'AliasOperation'=> 'Operation',
-           'AliasUsage'    => 'Label',
-           'Alias'         => 'Id',
+           'Alias'         => 'Uuid',
         );
 
         foreach ($convertion as $ogoneKey => $propelGetter) {
@@ -33,4 +31,10 @@ class OgoneAlias extends BaseOgoneAlias {
         return $convertion;
     }
 
+    public function preInsert(\PropelPDO $con = null)
+    {
+        $this->setUuid(uniqid('sf_'));
+
+        return true;
+    }
 } // OgoneAlias

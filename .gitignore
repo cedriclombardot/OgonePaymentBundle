@@ -2,6 +2,7 @@ Propel/om/*
 Propel/map/*
 vendor/
 Tests/build/
+Test/cache/*
 Tests/schema.xml
 composer.phar
 composer.lock

@@ -10,6 +10,8 @@
         <parameter key="ogone.transaction_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionBuilder</parameter>
         <parameter key="ogone.transaction_form_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
         <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
+        <parameter key="ogone.batch_request.class">Cedriclombardot\OgonePaymentBundle\Batch\BatchRequest</parameter>
+        <parameter key="ogone.batch_alias_manager.class">Cedriclombardot\OgonePaymentBundle\Batch\AliasManager</parameter>
         <parameter key="ogone.template_route">ogone_template</parameter>
     </parameters>
 
@@ -37,6 +39,17 @@
         <service id="ogone.feedbacker" class="%ogone.feedbacker.class%" public="true" scope="request">
             <argument type="service" id="request" />
             <argument type="service" id="ogone.secure_configuration" />
+        </service>
+
+        <service id="ogone.batch_request" class="%ogone.batch_request.class%" public="false">
+            <argument>%ogone.env%</argument>
+            <argument type="service" id="ogone.configuration" />
+            <argument type="service" id="ogone.secure_configuration" />
+        </service>
+
+        <service id="ogone.batch_alias_manager" class="%ogone.batch_alias_manager.class%" public="true">
+            <argument type="service" id="ogone.configuration" />
+            <argument type="service" id="ogone.batch_request" />
         </service>
 
     </services>

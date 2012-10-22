@@ -16,8 +16,9 @@
         }
     ],
     "require": {
-        "symfony/symfony": "2.*",
-        "propel/propel-bundle": "1.*"
+        "symfony/symfony": "2.1.*",
+        "propel/propel-bundle": "1.*",
+        "kriswallsmith/buzz": "dev-master"
     },
     "target-dir": "Cedriclombardot/OgonePaymentBundle",
     "autoload": {

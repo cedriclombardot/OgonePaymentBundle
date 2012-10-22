@@ -1,14 +1,12 @@
 framework:
     #esi:             ~
     secret:          SecretKeyForTests
-    charset:         UTF-8
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-    session:
-        auto_start:     true
+    session:         ~
 
 cedriclombardot_ogone_payment:
     secret:
@@ -19,6 +17,7 @@ cedriclombardot_ogone_payment:
         PSPID: MyCompagny
         currency: EUR
         language: fr_FR
+        env: test
     design:
         title: MyCompagny
         bgColor: "#4e84c4"

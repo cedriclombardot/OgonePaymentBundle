@@ -3,7 +3,7 @@
 namespace Cedriclombardot\OgonePaymentBundle\Tests\Config;
 
 use Cedriclombardot\OgonePaymentBundle\Tests\TestCase;
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer; 
+use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class ConfigurationContainerTest extends TestCase
@@ -41,14 +41,14 @@ class ConfigurationContainerTest extends TestCase
 
         $this->assertEquals('demo', $config->getTitle());
     }
-    
+
     public function testSetTemplate()
     {
-    	$config = new ConfigurationContainer;
-    	$config->setRouter($this->getContainer()->get('router'), 'ogone_template');
+        $config = new ConfigurationContainer;
+        $config->setRouter($this->getContainer()->get('router'), 'ogone_template');
 
         $config->setTemplate('::ogone.html.twig');
-        $this->assertEquals('http://localhost/ogone/template/%3A%3Aogone.html.twig', $config->getTP());
+        $this->assertEquals('http://localhost/ogone/template/::ogone.html.twig', $config->getTP());
     }
 
 }

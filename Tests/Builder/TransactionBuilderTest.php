@@ -11,7 +11,6 @@ use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAlias;
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrder;
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension;
 
 class TransactionBuilderTest extends TestCase
 {
@@ -19,7 +18,7 @@ class TransactionBuilderTest extends TestCase
 
     public function setUp()
     {
-        $formFactory = new FormFactory(array(0 => new DependencyInjectionExtension($this->getContainer(), array('field' => 'form.type.field', 'form' => 'form.type.form','hidden' => 'form.type.hidden', ), array('form' => array()), array(0 => 'form.type_guesser.validator'))));
+        $formFactory = new FormFactory($this->getContainer()->get('form.registry'), $this->getContainer()->get('form.resolved_type_factory'));
         $secureConfigurationContainer = new SecureConfigurationContainer(array('shaInKey' => 'testHash', 'algorithm' => 'sha512'));
         $configurationContainer = new ConfigurationContainer(array());
 
@@ -32,13 +31,11 @@ class TransactionBuilderTest extends TestCase
         $alias = new OgoneAlias();
         $alias->setName('USAGE');
         $alias->setOperation(OgoneAliasPeer::OPERATION_BYMERCHANT);
-        $alias->setLabel('LABEL');
 
         $this->assertEquals(null, $this->builder->getConfigurationContainer()->all());
 
         $this->builder->useAlias($alias);
         $this->assertEquals(array(
-            'aliasusage'     => 'LABEL',
             'aliasoperation' => 'BYMERCHANT',
         ), $this->builder->getConfigurationContainer()->all());
     }
