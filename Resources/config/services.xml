@@ -12,6 +12,7 @@
         <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
         <parameter key="ogone.batch_request.class">Cedriclombardot\OgonePaymentBundle\Batch\BatchRequest</parameter>
         <parameter key="ogone.batch_alias_manager.class">Cedriclombardot\OgonePaymentBundle\Batch\AliasManager</parameter>
+        <parameter key="ogone.alias_form.class">Cedriclombardot\OgonePaymentBundle\Form\AliasType</parameter>
         <parameter key="ogone.template_route">ogone_template</parameter>
     </parameters>
 
@@ -50,6 +51,9 @@
         <service id="ogone.batch_alias_manager" class="%ogone.batch_alias_manager.class%" public="true">
             <argument type="service" id="ogone.configuration" />
             <argument type="service" id="ogone.batch_request" />
+        </service>
+
+        <service id="ogone.alias_form" class="%ogone.alias_form.class%" public="true">
         </service>
 
     </services>
