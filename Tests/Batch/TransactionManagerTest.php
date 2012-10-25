@@ -21,10 +21,11 @@ class TransactionManagerTest extends TestCase
             '1215',
             'John Doe',
             '123',
-            '12'
+            '12',
+            'aliasName'
         );
 
-        $this->assertEquals('10;EUR;VISA;4111111111111111;1215;12;;John Doe;;RES;;;;MyShop;;;;;;;123;;;', $csv);
+        $this->assertEquals('10;EUR;VISA;4111111111111111;1215;12;;John Doe;;RES;;;;MyShop;;;aliasName;;;;123;;;', $csv);
     }
 }
 

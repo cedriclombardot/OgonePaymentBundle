@@ -72,7 +72,7 @@ class AliasType extends AbstractType
             try {
                 $authorisation = $transactionManager
                                 ->checkAuthorisation(
-                                    10,
+                                    0,
                                     $form->get('card_brand')->getData(),
                                     $form->get('card_number')->getData(),
                                     $form->get('date_month')->getData().$form->get('date_year')->getData(),

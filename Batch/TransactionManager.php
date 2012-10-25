@@ -6,25 +6,25 @@ class TransactionManager extends BatchManager
 {
     const OPERATION_RES = 'RES';
 
-    public function checkAuthorisation($amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId)
+    public function checkAuthorisation($amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId, $aliasName = '')
     {
         return $this->batchRequest->check(
-            $this->buildTransactionCSVRow(self::OPERATION_RES, $amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId),
+            $this->buildTransactionCSVRow(self::OPERATION_RES, $amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId, $aliasName),
             'CHECKAUTH'.$orderId.'-'.time()
         );
     }
 
-    public function requestAuthorisation($amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId)
+    public function requestAuthorisation($amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId, $aliasName = '')
     {
         return $this->batchRequest->process(
-            $this->buildTransactionCSVRow(self::OPERATION_RES, $amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId),
+            $this->buildTransactionCSVRow(self::OPERATION_RES, $amount, $brand, $card, $expirationDate, $customerName, $cvv, $orderId, $aliasName),
             'AUTH'.$orderId.'-'.time()
         );
     }
 
-    protected function buildTransactionCSVRow($operation, $amount, $brand, $cardNumber, $expirationDate, $customerName, $cvv, $orderId)
+    protected function buildTransactionCSVRow($operation, $amount, $brand, $cardNumber, $expirationDate, $customerName, $cvv, $orderId, $aliasName = '')
     {
-        return strtr('%amount%;%currency%;%brand%;%cardNumber%;%expirationDate%;%orderId%;;%customerName%;;%operation%;;;;%pspid%;;;;;;;%cvv%;;;', array(
+        return strtr('%amount%;%currency%;%brand%;%cardNumber%;%expirationDate%;%orderId%;;%customerName%;;%operation%;;;;%pspid%;;;%aliasName%;;;;%cvv%;;;', array(
             '%operation%'      => $operation,
             '%amount%'         => $amount,
             '%currency%'       => $this->configurationContainer->get('CURRENCY'),
@@ -35,6 +35,7 @@ class TransactionManager extends BatchManager
             '%customerName%'   => $customerName,
             '%cvv%'            => $cvv,
             '%pspid%'          => $this->configurationContainer->get('PSPID'),
+            '%aliasName%'      => $aliasName,
         ));
     }
 
