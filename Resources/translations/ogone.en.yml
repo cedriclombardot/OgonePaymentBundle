@@ -1,1 +1,7 @@
 alias.date_expired: Expiration date already passed
+"|invalid brand for Card Number VISA-|": Invalid brand
+card_cvv.invalid: CVV invalid
+
+error:
+    50001002: Card number format check failed for given card number
+    50001111: Invalid brand for Card Number

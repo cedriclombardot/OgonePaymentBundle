@@ -32,12 +32,24 @@ class BatchRequest
 
     public function check($datas, $fileReference = null)
     {
-        return $this->run($datas, $fileReference, self::PROCESS_MODE_CHECK);
+        $checkResponse =  $this->run($datas, $fileReference, self::PROCESS_MODE_CHECK);
+
+        if ($errors = $this->detectErrors($checkResponse, 'FORMAT_CHECK/FORMAT_CHECK_ERROR')) {
+            throw new InvalidBatchDatasException($errors);
+        }
+
+        return $checkResponse;
     }
 
     public function send($datas, $fileReference = null, $pfId = null)
     {
-        return $this->run($datas, $fileReference, self::PROCESS_MODE_SEND, $pfId);
+        $sendResponse = $this->run($datas, $fileReference, self::PROCESS_MODE_SEND, $pfId);
+
+        if ($errors = $this->detectErrors($sendResponse, 'FORMAT_SEND/FORMAT_SEND_ERROR')) {
+            throw new InvalidBatchDatasException($errors);
+        }
+
+        return $sendResponse;
     }
 
     public function process($datas, $fileReference = null)
@@ -46,23 +58,17 @@ class BatchRequest
 
         // 1 step : Check
         $checkResponse = $this->check($datas, $fileReference);
-        if ($errors = $this->detectErrors($checkResponse, 'FORMAT_CHECK/FORMAT_CHECK_ERROR')) {
-            throw new InvalidBatchDatasException($errors);
-        }
 
         $pfId = $this->getXmlNode($checkResponse, 'FORMAT_CHECK/FILEID');
         $pfId = (string) $pfId[0];
 
         // 2 Step :  SEND
         $sendResponse = $this->send($datas, $fileReference, $pfId);
-        if ($errors = $this->detectErrors($sendResponse, 'FORMAT_SEND/FORMAT_SEND_ERROR')) {
-            throw new InvalidBatchDatasException($errors);
-        }
 
         // 3 step : PROCESS
         $processResponse = $this->run(null, $fileReference, self::PROCESS_MODE_PROCESS, $pfId);
 
-        return $processResponse;        
+        return $processResponse;
     }
 
     protected function run($datas, $fileReference, $mode, $pfId = null)
@@ -77,7 +83,7 @@ class BatchRequest
     protected function getXmlNode(\Buzz\Message\Response $response, $xpath)
     {
         $xml = new \SimpleXMLElement($response->getContent());
-        
+
         return $xml->xpath($xpath);
     }
 

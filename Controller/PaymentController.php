@@ -101,12 +101,22 @@ class PaymentController extends Controller
         $alias->save();
 
         try {
+            $authorisation = $this->get('ogone.batch_transaction_manager')
+                                ->checkAuthorisation(
+                                    15,
+                                    'VISA',
+                                    '4511111111111111',
+                                    '1112',
+                                    $client->getFirstname().' '.$client->getFullName(),
+                                    '123',
+                                    null // No order id
+                                );
 
             $response = $this->get('ogone.batch_alias_manager')
                 ->addAlias(
                     $alias->getUuid(),
                     $client->getFirstname().' '.$client->getFullName(),
-                    '4111222111111111',
+                    '4111111111111111',
                     '1112',
                     'VISA'
                 );

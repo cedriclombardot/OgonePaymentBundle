@@ -1,1 +1,6 @@
-alias.date_expired: Date d'expiration dépassée
+alias.date_expired: "Date d'expiration dépassée"
+card_cvv.invalid: CVC invalide
+
+error:
+    50001002: Numéro de carte invalide
+    50001111: Type de carte invalide

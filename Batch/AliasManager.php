@@ -2,21 +2,10 @@
 
 namespace Cedriclombardot\OgonePaymentBundle\Batch;
 
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-
-class AliasManager
+class AliasManager extends BatchManager
 {
     const OPERATION_ADD =  'ADDALIAS';
     const OPERATION_DEL =  'DELALIAS';
-
-    protected $configurationContainer;
-    protected $batchRequest;
-
-    public function __construct(ConfigurationContainer $configurationContainer, BatchRequest $request)
-    {
-        $this->configurationContainer = $configurationContainer;
-        $this->batchRequest = $request;
-    }
 
     public function checkAddAlias($aliasName, $customerName, $cardNumber, $expirationDate, $brand)
     {
