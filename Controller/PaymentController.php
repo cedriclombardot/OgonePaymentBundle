@@ -65,7 +65,13 @@ class PaymentController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $this->get('ogone.feedbacker')->updateOrder();
+        if ($this->get('ogone.feedbacker')->hasOrder()) {
+            $this->get('ogone.feedbacker')->updateOrder();
+        }
+
+        if ($this->get('ogone.feedbacker')->hasAlias()) {
+            $this->get('ogone.feedbacker')->updateAlias();
+        }
 
         return $this->render(
             'CedriclombardotOgonePaymentBundle:Payment:feedback.html.twig'
@@ -85,10 +91,10 @@ class PaymentController extends Controller
     public function batchAliasAction()
     {
         $client = OgoneClientQuery::create()
-               ->filterByEmail('test@test.com')
+               ->filterByEmail('tesdt@test.com')
                ->findOneOrCreate();
 
-        $client->setFirstname('John');
+        $client->setFirstname('Joddhn');
         $client->setFullname('Doe');
         $client->save();
 
