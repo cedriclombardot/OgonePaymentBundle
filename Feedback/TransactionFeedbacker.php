@@ -13,7 +13,7 @@ class TransactionFeedbacker
     protected $secureConfigurationContainer;
 
     const PAY_STATUS_OK = 5;
-    const PAY_STATUS_PENDING = 0;
+    const PAY_STATUS_REFUSE = 2;
 
     public function __construct(Request $request, ConfigurationContainer $secureConfigurationContainer)
     {
@@ -89,7 +89,7 @@ class TransactionFeedbacker
 
         if ($this->request->get('STATUS') == self::PAY_STATUS_OK) {
             $alias->setStatus(OgoneAliasPeer::STATUS_OK);
-        } elseif ($this->request->get('STATUS') != self::PAY_STATUS_PENDING) {
+        } elseif ($this->request->get('STATUS') == self::PAY_STATUS_REFUSE) {
             $alias->setStatus(OgoneAliasPeer::STATUS_KO);
         }
 
