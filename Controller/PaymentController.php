@@ -91,17 +91,17 @@ class PaymentController extends Controller
     public function batchAliasAction()
     {
         $client = OgoneClientQuery::create()
-               ->filterByEmail('tesdt@test.com')
+               ->filterByEmail('test@test.com')
                ->findOneOrCreate();
 
-        $client->setFirstname('Joddhn');
+        $client->setFirstname('John');
         $client->setFullname('Doe');
         $client->save();
 
         $alias = OgoneAliasQuery::create()
                        ->filterByOgoneClient($client)
                        ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
-                       ->filterByName('ABONNEMENT')
+                       ->filterByName('REF')
                        ->findOneOrCreate();
 
         $alias->save();
@@ -140,13 +140,21 @@ class PaymentController extends Controller
                 ->requestAuthorisation(
                     15,
                     '', // No brand specified
-                    '4111111111111111',
+                    '4111113333333333',
                     '1112',
                     $client->getFirstname().' '.$client->getFullName(),
                     '123',
                     null, // No order id
                     $alias->getUuid()
                 );
+
+            $xml = new \SimpleXMLElement($authorisation->getContent());
+            $fileId = $xml->xpath('PROCESSING/FILEID');
+            $fileId = (string) $fileId[0];
+
+            $alias->setFileId($fileId);
+            $alias->setStatus(OgoneAliasPeer::STATUS_PENDING);
+            $alias->save();
 
             return new Response($authorisation->getContent(), 200, array('content-type' => 'text/xml'));
 
