@@ -29,7 +29,10 @@ class AliasType extends AbstractType
         $months = array('01','02','03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
         $years  = range(date('y'), date('y') + 4 );
 
-        $builder
+        $builder->add('card_brand', 'choice', array(
+            'choices'  => array_combine($this->brands, $this->brands),
+            'required' => true,
+        ))
         ->add('card_number', 'text', array(
             'required' => true,
         ))
@@ -70,7 +73,7 @@ class AliasType extends AbstractType
                 $authorisation = $transactionManager
                                 ->checkAuthorisation(
                                     0,
-                                    '',
+                                    $form->get('card_brand')->getData(),
                                     $form->get('card_number')->getData(),
                                     $form->get('date_month')->getData().$form->get('date_year')->getData(),
                                     $form->get('card_name')->getData(),
