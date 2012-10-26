@@ -30,7 +30,13 @@ class TransactionFormBuilder
 
     public function build(ConfigurationContainer $configurationContainer)
     {
-        foreach ($configurationContainer->all() as $key => $value) {
+        $fields = $configurationContainer->all();
+
+        if (!isset($fields['amount'])) {
+            $fields['amount'] = 0;
+        }
+
+        foreach ($fields as $key => $value) {
             if ($value instanceof \DateTime) {
                 $value = $value->format('Y-m-d');
             }
@@ -52,6 +58,9 @@ class TransactionFormBuilder
         $toHash = '';
 
         $properties = $configurationContainer->all();
+        if (!isset($properties['amount'])) {
+            $properties['amount'] = 0;
+        }
         ksort($properties);
 
         foreach ($properties as $key => $val) {

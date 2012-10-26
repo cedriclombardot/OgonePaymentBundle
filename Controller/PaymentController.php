@@ -32,8 +32,8 @@ class PaymentController extends Controller
 
         $transaction = $this->get('ogone.transaction_builder')
                             ->order()
-                                ->setClient($client)
-                                ->setAmount(100)
+                                //->setClient($client)
+                                ->setAmount(0)
                             ->end()
                             ->configure()
                                 ->setBgColor("red")
@@ -46,7 +46,7 @@ class PaymentController extends Controller
                             ;
 
         if ($this->container->getParameter('ogone.use_aliases')) {
-            $transaction->useAlias($alias);
+     ///       $transaction->useAlias($alias);
         }
 
         $form = $transaction->getForm();
@@ -107,7 +107,6 @@ class PaymentController extends Controller
         $alias->save();
 
         // Method 1 : Without verifications
-        /*
         try {
             $response = $this->get('ogone.batch_alias_manager')
                 ->addAlias(
@@ -132,44 +131,8 @@ class PaymentController extends Controller
             return new Response($xml, 400, array('content-type' => 'text/xml'));
 
         }
-        */
+        
 
-        // Method 2 : By a 0 € authorisation : need ogone activate this feature
-        try {
-            $authorisation = $this->get('ogone.batch_transaction_manager')
-                ->requestAuthorisation(
-                    15,
-                    '', // No brand specified
-                    '4111113333333333',
-                    '1112',
-                    $client->getFirstname().' '.$client->getFullName(),
-                    '123',
-                    null, // No order id
-                    $alias->getUuid()
-                );
-
-            $xml = new \SimpleXMLElement($authorisation->getContent());
-            $fileId = $xml->xpath('PROCESSING/FILEID');
-            $fileId = (string) $fileId[0];
-
-            $alias->setFileId($fileId);
-            $alias->setStatus(OgoneAliasPeer::STATUS_PENDING);
-            $alias->save();
-
-            return new Response($authorisation->getContent(), 200, array('content-type' => 'text/xml'));
-
-        } catch (\Cedriclombardot\OgonePaymentBundle\Exception\InvalidBatchDatasException $e) {
-            $xml = '<ERRORS>';
-
-            foreach ($e->getErrors() as $error) {
-                $xml .= '<ERROR>'.$error->asXml().'</ERROR>';
-            }
-
-            $xml .= '</ERRORS>';
-
-            return new Response($xml, 400, array('content-type' => 'text/xml'));
-
-        }
-
+        // Method 2 : By a 0 € ecommerce form
     }
 }
