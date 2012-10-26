@@ -29,7 +29,7 @@ class TransactionFormBuilderTest extends TestCase
     {
         $configurationContainer = new ConfigurationContainer(array('title' => 'page demo'));
 
-        $hash = strtoupper(hash('sha512','TITLE=page demotestHash'));
+        $hash = strtoupper(hash('sha512','AMOUNT=0testHashTITLE=page demotestHash'));
         $this->assertEquals($hash, $this->builder->getSHASign($configurationContainer));
     }
 
@@ -38,8 +38,9 @@ class TransactionFormBuilderTest extends TestCase
         $configurationContainer = new ConfigurationContainer(array('title' => 'page demo'));
         $this->builder->build($configurationContainer);
 
-        $this->assertEquals(2, $this->builder->getForm()->count()); // TITLE + SHASIGN
+        $this->assertEquals(3, $this->builder->getForm()->count()); // TITLE + SHASIGN
         $this->assertTrue($this->builder->getForm()->has('TITLE'));
+        $this->assertTrue($this->builder->getForm()->has('AMOUNT'));
         $this->assertTrue($this->builder->getForm()->has('SHASign'));
         $this->assertEquals('', $this->builder->getForm()->getName());
     }
