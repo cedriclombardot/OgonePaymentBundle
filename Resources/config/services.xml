@@ -11,6 +11,7 @@
         <parameter key="ogone.transaction_form_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
         <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
         <parameter key="ogone.batch_request.class">Cedriclombardot\OgonePaymentBundle\Batch\BatchRequest</parameter>
+        <parameter key="ogone.file_downloader.class">Cedriclombardot\OgonePaymentBundle\Batch\FileDownloader</parameter>
         <parameter key="ogone.batch_alias_manager.class">Cedriclombardot\OgonePaymentBundle\Batch\AliasManager</parameter>
         <parameter key="ogone.batch_transaction_manager.class">Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager</parameter>
         <parameter key="ogone.alias_form.class">Cedriclombardot\OgonePaymentBundle\Form\AliasType</parameter>
@@ -44,6 +45,12 @@
         </service>
 
         <service id="ogone.batch_request" class="%ogone.batch_request.class%" public="false">
+            <argument>%ogone.env%</argument>
+            <argument type="service" id="ogone.configuration" />
+            <argument type="service" id="ogone.secure_configuration" />
+        </service>
+
+        <service id="ogone.file_downloader" class="%ogone.file_downloader.class%" public="true">
             <argument>%ogone.env%</argument>
             <argument type="service" id="ogone.configuration" />
             <argument type="service" id="ogone.secure_configuration" />
