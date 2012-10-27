@@ -11,6 +11,7 @@ use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAlias;
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrder;
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 use Symfony\Component\Form\FormFactory;
+use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
 
 class TransactionBuilderTest extends TestCase
 {
@@ -21,9 +22,10 @@ class TransactionBuilderTest extends TestCase
         $formFactory = new FormFactory($this->getContainer()->get('form.registry'), $this->getContainer()->get('form.resolved_type_factory'));
         $secureConfigurationContainer = new SecureConfigurationContainer(array('shaInKey' => 'testHash', 'algorithm' => 'sha512'));
         $configurationContainer = new ConfigurationContainer(array());
+        $tm = new TransactionManager($configurationContainer, $this->getContainer()->get('ogone.batch_request'));
 
         $formBuilder = new TransactionFormBuilder($formFactory, $secureConfigurationContainer);
-        $this->builder = new TransactionBuilderMock($formBuilder, $configurationContainer);
+        $this->builder = new TransactionBuilderMock($formBuilder, $configurationContainer, $tm);
     }
 
     public function testUseAlias()
@@ -71,9 +73,9 @@ class TransactionBuilderTest extends TestCase
 
 class TransactionBuilderMock extends TransactionBuilder
 {
-    public function __construct(TransactionFormBuilder $transactionFormBuilder, ConfigurationContainer $configurationContainer)
+    public function __construct(TransactionFormBuilder $transactionFormBuilder, ConfigurationContainer $configurationContainer, TransactionManager $transactionManager)
     {
-        parent::__construct($transactionFormBuilder, $configurationContainer);
+        parent::__construct($transactionFormBuilder, $configurationContainer, $transactionManager);
         $this->order = new OgoneOrderMock();
     }
 
