@@ -59,8 +59,7 @@ class BatchRequest
         // 1 step : Check
         $checkResponse = $this->check($datas, $fileReference);
 
-        $pfId = $this->getXmlNode($checkResponse, 'FORMAT_CHECK/FILEID');
-        $pfId = (string) $pfId[0];
+        $pfId = $this->getFileIdFromResponse($checkResponse);
 
         // 2 Step :  SEND
         $sendResponse = $this->send($datas, $fileReference, $pfId);
@@ -69,6 +68,13 @@ class BatchRequest
         $processResponse = $this->run(null, $fileReference, self::PROCESS_MODE_PROCESS, $pfId);
 
         return $processResponse;
+    }
+
+    public function getFileIdFromResponse($response)
+    {
+        $pfId = $this->getXmlNode($response, 'FORMAT_CHECK/FILEID');
+
+        return (string) $pfId[0];
     }
 
     protected function run($datas, $fileReference, $mode, $pfId = null)

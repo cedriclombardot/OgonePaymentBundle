@@ -32,6 +32,7 @@
         <service id="ogone.transaction_builder" class="%ogone.transaction_builder.class%" public="true">
             <argument type="service" id="ogone.transaction_form_builder" />
             <argument type="service" id="ogone.configuration" />
+            <argument type="service" id="ogone.batch_transaction_manager" />
         </service>
 
         <service id="ogone.transaction_form_builder" class="%ogone.transaction_form_builder.class%" public="false">
@@ -44,7 +45,7 @@
             <argument type="service" id="ogone.secure_configuration" />
         </service>
 
-        <service id="ogone.batch_request" class="%ogone.batch_request.class%" public="false">
+        <service id="ogone.batch_request" class="%ogone.batch_request.class%" public="true">
             <argument>%ogone.env%</argument>
             <argument type="service" id="ogone.configuration" />
             <argument type="service" id="ogone.secure_configuration" />
