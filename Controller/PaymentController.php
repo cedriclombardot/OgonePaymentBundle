@@ -46,7 +46,7 @@ class PaymentController extends Controller
                             ;
 
         if ($this->container->getParameter('ogone.use_aliases')) {
-     ///       $transaction->useAlias($alias);
+            $transaction->useAlias($alias);
         }
 
         $form = $transaction->getForm();
