@@ -23,6 +23,8 @@ class BatchRequest
 
     protected $secureConfigurationContainer;
 
+    protected $lastpfId;
+
     public function __construct($ogoneEnv, ConfigurationContainer $configurationContainer, SecureConfigurationContainer $secureConfigurationContainer)
     {
         $this->ogoneEnv = $ogoneEnv;
@@ -58,7 +60,6 @@ class BatchRequest
 
         // 1 step : Check
         $checkResponse = $this->check($datas, $fileReference);
-
         $pfId = $this->getFileIdFromResponse($checkResponse);
 
         // 2 Step :  SEND
@@ -73,8 +74,14 @@ class BatchRequest
     public function getFileIdFromResponse($response)
     {
         $pfId = $this->getXmlNode($response, 'FORMAT_CHECK/FILEID');
+        $this->lastpfId = (string) $pfId[0];
 
-        return (string) $pfId[0];
+        return $this->lastpfId;
+    }
+
+    public function getLastPfId()
+    {
+        return $this->lastpfId;
     }
 
     protected function run($datas, $fileReference, $mode, $pfId = null)

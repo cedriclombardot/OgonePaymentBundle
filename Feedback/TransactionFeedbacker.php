@@ -12,7 +12,7 @@ class TransactionFeedbacker
 {
     protected $secureConfigurationContainer;
 
-    const PAY_STATUS_OK = 5;
+    const PAY_STATUS_OK = 9;
     const PAY_STATUS_REFUSE = 2;
 
     public function __construct(Request $request, ConfigurationContainer $secureConfigurationContainer)

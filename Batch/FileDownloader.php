@@ -2,22 +2,24 @@
 
 namespace Cedriclombardot\OgonePaymentBundle\Batch;
 
+use Cedriclombardot\OgonePaymentBundle\File\OgoneDownloadedFile;
+
 class FileDownloader extends BatchRequest
 {
-    const URL = 'https://secure.ogone.com/ncol/%env%/payment_download_ncp.asp'; 
+    const URL = 'https://secure.ogone.com/ncol/%env%/payment_download_ncp.asp';
 
     public function getFile($fileReference)
     {
         $request = new \Buzz\Message\Form\FormRequest();
         $request->fromUrl($this->getUrl());
-       
+
         $request->setField('ID', $fileReference);
         $request->setField('PSPID', $this->configurationContainer->get('PSPID'));
         $request->setField('USERID', $this->secureConfigurationContainer->get('USERID'));
         $request->setField('PSWD', $this->secureConfigurationContainer->get('USERPASSWORD'));
         $request->setField('Format', 'XML');
-       
-        return $this->processFormRequest($request);
+
+        return new OgoneDownloadedFile($this->processFormRequest($request));
     }
 
     protected function getUrl()
