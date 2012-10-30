@@ -22,6 +22,7 @@ class OgoneAlias extends BaseOgoneAlias
         $convertion = array(
            'AliasOperation'=> 'Operation',
            'Alias'         => 'Uuid',
+           'AliasUsage'    => 'Name'
         );
 
         foreach ($convertion as $ogoneKey => $propelGetter) {
