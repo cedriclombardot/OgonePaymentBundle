@@ -78,10 +78,11 @@ class PaymentController extends Controller
         );
     }
 
-    public function renderTemplateAction($twigPath)
+    public function renderTemplateAction($twigPath, array $context = array())
     {
         return $this->render(
-            $twigPath
+            $twigPath,
+            $context
         );
     }
 
@@ -131,7 +132,6 @@ class PaymentController extends Controller
             return new Response($xml, 400, array('content-type' => 'text/xml'));
 
         }
-        
 
         // Method 2 : By a 0 € ecommerce form
     }

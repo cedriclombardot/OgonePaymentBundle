@@ -22,30 +22,30 @@ class ConfigurationContainer extends ParameterBag
        'ACCEPTURL', 'DECLINEURL', 'EXCEPTIONURL', 'CANCELURL', 'BACKURL',
        'ALIASOPERATION', 'ALIAS', 'ALIASUSAGE',
     );
-    
+
     protected $router;
-    
+
     protected $templateRoute;
 
     public function __construct(array $defaults = array(), $router = null, $templateRoute = null)
     {
-    	$this->setRouter($router, $templateRoute);
-        
+        $this->setRouter($router, $templateRoute);
+
         foreach ($defaults as $key => $val) {
             $method = 'set'.\Symfony\Component\DependencyInjection\Container::camelize($key);
             $this->$method($val);
         }
     }
-    
+
     public function setRouter($router, $templateRoute)
     {
-    	$this->router = $router;
+        $this->router = $router;
         $this->templateRoute = $templateRoute;
     }
-    
-    public function setTemplate($twigPath)
+
+    public function setTemplate($twigPath, array $context = array())
     {
-    	return $this->setTP($this->router->generate($this->templateRoute, array('twigPath' => $twigPath), true));
+        return $this->setTP($this->router->generate($this->templateRoute, array_merge(array('twigPath' => $twigPath), $context), true));
     }
 
     public function onEnd($object)
@@ -85,7 +85,6 @@ class ConfigurationContainer extends ParameterBag
             return $this;
         }
     }
-
 
     public function findProperty($name)
     {
