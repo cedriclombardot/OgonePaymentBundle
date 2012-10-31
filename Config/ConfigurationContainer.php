@@ -43,9 +43,20 @@ class ConfigurationContainer extends ParameterBag
         $this->templateRoute = $templateRoute;
     }
 
-    public function setTemplate($twigPath, array $context = array())
+    /**
+    * @param string $twigPath The template name
+    * @param array $context The twig variables context
+    * @param string $urlPrefix if specified use your prefix instead generate absolute urls
+    *
+    * @return self
+    */
+    public function setTemplate($twigPath, array $context = array(), $urlPrefix = null)
     {
-        return $this->setTP($this->router->generate($this->templateRoute, array_merge(array('twigPath' => $twigPath), $context), true));
+        if (!$urlPrefix) {
+            return $this->setTP($this->router->generate($this->templateRoute, array_merge(array('twigPath' => $twigPath), array('context' => $context)), true));
+        } else {
+            return $this->setTP($urlPrefix.$this->router->generate($this->templateRoute, array_merge(array('twigPath' => $twigPath), array('context' => $context))));
+        }
     }
 
     public function onEnd($object)

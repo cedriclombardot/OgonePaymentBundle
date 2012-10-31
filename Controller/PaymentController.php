@@ -78,11 +78,11 @@ class PaymentController extends Controller
         );
     }
 
-    public function renderTemplateAction($twigPath, array $context = array())
+    public function renderTemplateAction($twigPath)
     {
         return $this->render(
             $twigPath,
-            $context
+            $this->get('request')->get('context', array())
         );
     }
 
