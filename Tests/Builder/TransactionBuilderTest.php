@@ -39,6 +39,7 @@ class TransactionBuilderTest extends TestCase
         $this->builder->useAlias($alias);
         $this->assertEquals(array(
             'aliasoperation' => 'BYMERCHANT',
+            'aliasusage'     => 'USAGE',
         ), $this->builder->getConfigurationContainer()->all());
     }
 
