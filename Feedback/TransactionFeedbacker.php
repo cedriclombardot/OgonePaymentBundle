@@ -12,9 +12,6 @@ class TransactionFeedbacker
 {
     protected $secureConfigurationContainer;
 
-    const PAY_STATUS_OK = 9;
-    const PAY_STATUS_REFUSE = 2;
-
     public function __construct(Request $request, ConfigurationContainer $secureConfigurationContainer)
     {
         $this->request = $request;
@@ -87,9 +84,9 @@ class TransactionFeedbacker
             throw new \LogicException('Alias cant be invalid here !!');
         }
 
-        if ($this->request->get('STATUS') == self::PAY_STATUS_OK) {
+        if (OgoneCodes::isPayed($this->request->get('STATUS'))) {
             $alias->setStatus(OgoneAliasPeer::STATUS_OK);
-        } elseif ($this->request->get('STATUS') == self::PAY_STATUS_REFUSE) {
+        } elseif (OgoneCodes::isRefused($this->request->get('STATUS'))) {
             $alias->setStatus(OgoneAliasPeer::STATUS_KO);
         }
 

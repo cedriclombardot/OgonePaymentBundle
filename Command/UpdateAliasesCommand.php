@@ -4,19 +4,15 @@ namespace Cedriclombardot\OgonePaymentBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasQuery;
 use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 
+use Cedriclombardot\OgonePaymentBundle\Feedback\OgoneCodes;
 
 class UpdateAliasesCommand extends ContainerAwareCommand
 {
-
-    const PAY_STATUS_OK = 5;
-    const PAY_STATUS_REFUSE = 2;
-
      /**
      * @see Command
      */
@@ -55,11 +51,11 @@ EOT
             $statusLib = (string) $statusLib[0]['LIB'];
 
             $output->writeln('>> Ogone status <info>'.$status.'</info> '.$statusLib);
-            
-            if ($status == self::PAY_STATUS_OK) {
+
+            if (OgoneCodes::isPayed($status)) {
                 $alias->setStatus(OgoneAliasPeer::STATUS_OK);
                 $output->writeln('>> Set Alias STATUS <info>OK</info> ');
-            } elseif ($status == self::PAY_STATUS_REFUSE) {
+            } elseif (OgoneCodes::isRefused($status)) {
                 $alias->setStatus(OgoneAliasPeer::STATUS_KO);
                 $output->writeln('>> Set Alias STATUS <info>KO</info> ');
             }
