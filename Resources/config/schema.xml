@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database name="default" namespace="Cedriclombardot\OgonePaymentBundle\Propel" defaultIdMethod="native">
 
-    <table name="ogone_order">
+    <table name="ogone_order" allowPkInsert="true">
         <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 
         <column name="amount" type="integer" size="11" required="true" />
