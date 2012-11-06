@@ -85,9 +85,9 @@ class TransactionFeedbacker
         }
 
         if (OgoneCodes::isPayed($this->request->get('STATUS'))) {
-            $alias->setStatus(OgoneAliasPeer::STATUS_OK);
+            $alias->setStatus(OgoneAliasPeer::STATUS_ACTIVE);
         } elseif (OgoneCodes::isRefused($this->request->get('STATUS'))) {
-            $alias->setStatus(OgoneAliasPeer::STATUS_KO);
+            $alias->setStatus(OgoneAliasPeer::STATUS_ERROR);
         }
 
         // Update client info if user change is name for the cb

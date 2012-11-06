@@ -81,7 +81,7 @@
         <column name="uuid" type="varchar" size="255" required="true" primaryString="true" />
         <column name="name" type="varchar" size="255" required="false" />
         <column name="operation" type="ENUM" valueSet="BYMERCHANT, BYPSP" required="true" />
-        <column name="status" type="enum" valueSet="PENDING,OK,KO" default="PENDING" required="true" />
+        <column name="status" type="ENUM" valueSet="PENDING, ACTIVE, ERROR" required="true" default="PENDING" />
         <column name="fileId" type="varchar" required="true" />
 
         <foreign-key foreignTable="ogone_client" onUpdate="cascade" onDelete="cascade">

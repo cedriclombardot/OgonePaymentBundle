@@ -53,11 +53,11 @@ EOT
             $output->writeln('>> Ogone status <info>'.$status.'</info> '.$statusLib);
 
             if (OgoneCodes::isPayed($status)) {
-                $alias->setStatus(OgoneAliasPeer::STATUS_OK);
-                $output->writeln('>> Set Alias STATUS <info>OK</info> ');
+                $alias->setStatus(OgoneAliasPeer::STATUS_ACTIVE);
+                $output->writeln('>> Set Alias STATUS <info>ACTIVE</info> ');
             } elseif (OgoneCodes::isRefused($status)) {
-                $alias->setStatus(OgoneAliasPeer::STATUS_KO);
-                $output->writeln('>> Set Alias STATUS <info>KO</info> ');
+                $alias->setStatus(OgoneAliasPeer::STATUS_ERROR);
+                $output->writeln('>> Set Alias STATUS <info>ERROR</info> ');
             }
 
             $alias->save();
