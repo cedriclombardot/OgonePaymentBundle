@@ -90,6 +90,12 @@ class TransactionFeedbacker
             $alias->setStatus(OgoneAliasPeer::STATUS_KO);
         }
 
+        // Update client info if user change is name for the cb
+        if ($this->request->get('CN')) {
+            $alias->getOgoneClient()->setFullName($this->request->get('CN'));
+            $alias->getOgoneClient()->save();
+        }
+
         $alias->save();
 
         return $this;
