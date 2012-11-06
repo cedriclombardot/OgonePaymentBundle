@@ -41,12 +41,22 @@ class TransactionFormBuilder
                 $value = $value->format('Y-m-d');
             }
 
-            $this->form->add($configurationContainer->findProperty($key), 'hidden', array('data' => $value));
+            $this->form->add($configurationContainer->findProperty($key), 'hidden', array('data' => $this->stripAccents($value)));
         }
 
         $this->form->add('SHASign', 'hidden', array('data' => $this->getSHASign($configurationContainer)));
 
         return $this;
+    }
+
+    protected function stripAccents($str)
+    {
+        $str = htmlentities($str, ENT_NOQUOTES, 'utf-8');
+        $str = preg_replace('#\&([A-za-z])(?:uml|circ|tilde|acute|grave|cedil|ring)\;#', '\1', $str);
+        $str = preg_replace('#\&([A-za-z]{2})(?:lig)\;#', '\1', $str);
+        $str = preg_replace('#\&[^;]+\;#','', $str);
+
+        return $str;
     }
 
     protected function getSHASign(ConfigurationContainer $configurationContainer)
@@ -68,7 +78,7 @@ class TransactionFormBuilder
                 $val = $val->format('Y-m-d');
             }
 
-            $toHash .= strtoupper($key).'='.$val.$this->secureConfigurationContainer->getShaInKey();
+            $toHash .= strtoupper($key).'='.$this->stripAccents($val).$this->secureConfigurationContainer->getShaInKey();
         }
 
         return strtoupper(hash($this->secureConfigurationContainer->getAlgorithm(), $toHash));
