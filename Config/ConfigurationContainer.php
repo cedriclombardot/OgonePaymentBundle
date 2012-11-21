@@ -53,10 +53,12 @@ class ConfigurationContainer extends ParameterBag
     public function setTemplate($twigPath, array $context = array(), $urlPrefix = null)
     {
         if (!$urlPrefix) {
-            return $this->setTP($this->router->generate($this->templateRoute, array_merge(array('twigPath' => $twigPath), array('context' => $context)), true));
+            $url = $this->router->generate($this->templateRoute, array('twigPath' => $twigPath, 'context' => base64_encode(json_encode($context))), true);
         } else {
-            return $this->setTP($urlPrefix.$this->router->generate($this->templateRoute, array_merge(array('twigPath' => $twigPath), array('context' => $context))));
+            $url = $urlPrefix.$this->router->generate($this->templateRoute, array('twigPath' => $twigPath, 'context' => base64_encode(json_encode($context))));
         }
+
+        return $this->setTP($url);
     }
 
     public function onEnd($object)

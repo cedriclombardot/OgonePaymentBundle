@@ -80,9 +80,15 @@ class PaymentController extends Controller
 
     public function renderTemplateAction($twigPath)
     {
+        $context = array();
+
+        if ($this->get('request')->get('context')) {
+            $context = json_decode(base64_decode($this->get('request')->get('context')), true);
+        }
+
         return $this->render(
             $twigPath,
-            $this->get('request')->get('context', array())
+            $context
         );
     }
 
