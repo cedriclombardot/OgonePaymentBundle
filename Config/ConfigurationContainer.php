@@ -41,6 +41,15 @@ class ConfigurationContainer extends ParameterBag
     {
         $this->router = $router;
         $this->templateRoute = $templateRoute;
+
+        return $this;
+    }
+
+    public function setTemplateRoute($templateRoute)
+    {
+        $this->templateRoute = $templateRoute;
+
+        return $this;
     }
 
     /**
