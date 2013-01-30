@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "symfony/symfony": "2.1.*",
+        "symfony/symfony": ">=2.1.0",
         "propel/propel-bundle": "1.*",
         "kriswallsmith/buzz": "dev-master"
     },
