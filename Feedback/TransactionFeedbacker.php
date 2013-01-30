@@ -20,13 +20,13 @@ class TransactionFeedbacker
 
     public function isValidCall()
     {
-        if (!$this->request->query->has('SHASIGN')) {
+        if (!$this->request->request->has('SHASIGN')) {
             return false;
         }
 
         // Check sign
         $toSign = array();
-        foreach ($this->request->query->all() as $key => $val) {
+        foreach ($this->request->request->all() as $key => $val) {
             $toSign[strtoupper($key)] = $val;
         }
 
