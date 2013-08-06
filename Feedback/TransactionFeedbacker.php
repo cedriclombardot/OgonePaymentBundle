@@ -23,20 +23,22 @@ class TransactionFeedbacker
         if (!$this->request->request->has('SHASIGN') && !$this->request->query->has('SHASIGN')) {
             return false;
         }
-
         // Check sign
         $toSign = array();
         if ($this->request->query->has('SHASIGN')) {
             foreach ($this->request->query->all() as $key => $val) {
-                $toSign[strtoupper($key)] = $val;
+                if($val != '') {
+                    $toSign[strtoupper($key)] = $val;
+                }
             }
         } else {
             foreach ($this->request->request->all() as $key => $val) {
-                $toSign[strtoupper($key)] = $val;
+                if($val != '') {
+                    $toSign[strtoupper($key)] = $val;
+                }
             }
         }
         
-
         unset($toSign["SHASIGN"]);
         ksort($toSign);
 
