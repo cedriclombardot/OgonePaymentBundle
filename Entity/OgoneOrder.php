@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\DemoBundle\Entity;
+namespace Cedriclombardot\OgonePaymentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -273,5 +273,61 @@ class OgoneOrder
      */
     private $updatedAt;
 
+    protected $onEnd;
 
+    public function onEnd($object)
+    {
+        $this->onEnd = $object;
+
+        return $this;
+    }
+
+    public function end()
+    {
+        $this->save();
+
+        $toReturn = $this->onEnd;
+        $this->onEnd = null;
+
+        return $toReturn;
+    }
+
+    public function toOgone()
+    {
+        $convertion = array(
+           'orderId'    => 'Id',
+           'amount'     => 'Amount',
+           'amountHtva' => 'AmountHtva',
+           'UserId'     => 'ClientId',
+           'Com'        => 'Description',
+           'Operation'  => 'Operation',
+           'PM'         => 'PaymentMethod',
+           'ECOM_SHIPTO_TELECOM_PHONE_NUMBER' => 'ShiptoPhoneNumber',
+           'ECOM_SHIPTO_ONLINE_EMAIL'       => 'ShiptoEmail',
+           'ECOM_SHIPTO_POSTAL_NAME_PREFIX' => 'ShiptoCivility',
+           'ECOM_SHIPTO_POSTAL_NAME_FIRST'  => 'ShiptoFirstname',
+           'ECOM_SHIPTO_POSTAL_NAME_LAST'   => 'ShiptoName',
+           'ECOM_SHIPTO_COMPANY'            => 'ShiptoCompagny',
+           'ECOM_SHIPTO_POSTAL_STREET_LINE1'=> 'ShiptoAddress',
+           'ECOM_SHIPTO_POSTAL_STREET_LINE2'=> 'ShiptoAddress2',
+           'ECOM_SHIPTO_POSTAL_CITY'        => 'ShiptoCity',
+           'ECOM_SHIPTO_POSTAL_COUNTRYCODE' => 'ShiptoCountrycode',
+           'ECOM_SHIPTO_POSTAL_POSTALCODE'  => 'ShiptoPostalcode',
+           'ECOM_BILLTO_POSTAL_STREET_LINE1'=> 'BilltoAddress',
+           'ECOM_BILLTO_POSTAL_STREET_LINE2'=> 'BilltoAddress2',
+           'ECOM_BILLTO_POSTAL_CITY'        => 'BilltoCity',
+           'ECOM_BILLTO_POSTAL_COUNTRYCODE' => 'BilltoCountrycode',
+           'ECOM_BILLTO_POSTAL_POSTALCODE'  => 'BilltoPostalcode',
+        );
+
+        foreach ($convertion as $ogoneKey => $propelGetter) {
+            $convertion[$ogoneKey] = $this->{'get'.$propelGetter}();
+        }
+
+        if ($this->getOgoneClient()) {
+               $convertion = array_merge($convertion, $this->getOgoneClient()->toOgone());
+        }
+
+        return $convertion;
+    }
 }

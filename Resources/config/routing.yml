@@ -1,6 +1,6 @@
 ogone_payment_form:
     pattern: /ogone/payment
-    defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:index }
+    defaults: { _controller: CedriclombardotOgonePaymentBundle:DoctrinePayment:index }
 
 ogone_payment_feedback:
     pattern: /ogone/payment-feedback

@@ -24,23 +24,13 @@ class DoctrinePaymentController extends Controller
             $this->getManager()->flush();
         }
 
-        // if ($this->container->getParameter('ogone.use_aliases')) {
-        //     $alias = OgoneAliasQuery::create()
-        //                ->filterByOgoneClient($client)
-        //                ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
-        //                ->filterByName('ABONNEMENT')
-        //                ->findOneOrCreate();
-
-        //      $alias->save();
-        // }
-
         $transaction = $this->get('ogone.transaction_builder')
             ->order()
-                //->setClient($client)
-                ->setAmount(0)
+                ->setClient($client)
+                ->setAmount(99)
             ->end()
             ->configure()
-                ->setBgColor("red")
+                ->setBgColor('#ffffff')
                 ->setAcceptUrl($this->generateUrl('ogone_payment_feedback', array(), true))
                 ->setDeclineUrl($this->generateUrl('ogone_payment_feedback', array(), true))
                 ->setExceptionUrl($this->generateUrl('ogone_payment_feedback', array(), true))
