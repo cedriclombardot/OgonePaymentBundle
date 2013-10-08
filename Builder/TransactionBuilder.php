@@ -4,8 +4,8 @@ namespace Cedriclombardot\OgonePaymentBundle\Builder;
 
 use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
 
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrder;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAlias;
+use Cedriclombardot\OgonePaymentBundle\Entity\OgoneOrder;
+use Cedriclombardot\OgonePaymentBundle\Entity\OgoneAlias;
 use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
 
 class TransactionBuilder
@@ -45,10 +45,12 @@ class TransactionBuilder
 
     public function getForm()
     {
-        return $this->prepareTransaction()
-                    ->transactionFormBuilder
-                    ->build($this->configurationContainer)
-                    ->getForm();
+        return $this
+            ->prepareTransaction()
+            ->transactionFormBuilder
+            ->build($this->configurationContainer)
+            ->getForm()
+        ;
     }
 
     protected function prepareTransaction()
@@ -72,16 +74,16 @@ class TransactionBuilder
     public function getBatchTransactionManagerCsvRow()
     {
         return $this->batchTransactionManager
-                    ->getSaleCsvRow(
-                        $this->order->getAmount(),
-                        null,
-                        null,
-                        null,
-                        $this->order->getOgoneClient()->getFullname(),
-                        null,
-                        $this->order->getId(),
-                        $this->configurationContainer->getAlias()
-                );
+            ->getSaleCsvRow(
+                $this->order->getAmount(),
+                null,
+                null,
+                null,
+                $this->order->getOgoneClient()->getFullname(),
+                null,
+                $this->order->getId(),
+                $this->configurationContainer->getAlias()
+            )
+        ;
     }
-
 }

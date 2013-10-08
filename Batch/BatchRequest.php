@@ -34,7 +34,7 @@ class BatchRequest
 
     public function check($datas, $fileReference = null)
     {
-        $checkResponse =  $this->run($datas, $fileReference, self::PROCESS_MODE_CHECK);
+        $checkResponse = $this->run($datas, $fileReference, self::PROCESS_MODE_CHECK);
 
         if ($errors = $this->detectErrors($checkResponse, 'FORMAT_CHECK/FORMAT_CHECK_ERROR')) {
             throw new InvalidBatchDatasException($errors);
@@ -62,7 +62,7 @@ class BatchRequest
         $checkResponse = $this->check($datas, $fileReference);
         $pfId = $this->getFileIdFromResponse($checkResponse);
 
-        // 2 Step :  SEND
+        // 2 Step : SEND
         $sendResponse = $this->send($datas, $fileReference, $pfId);
 
         // 3 step : PROCESS

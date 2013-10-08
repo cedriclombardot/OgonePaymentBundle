@@ -4,7 +4,7 @@ namespace Cedriclombardot\OgonePaymentBundle\Batch;
 
 use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
 
-abstract class BatchManager
+abstract class  BatchManager
 {
     protected $configurationContainer;
     protected $batchRequest;
