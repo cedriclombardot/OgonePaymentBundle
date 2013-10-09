@@ -133,6 +133,26 @@ class OgoneClient
      */
     private $updatedAt;
 
+    /**
+     * @var orders
+     *
+     * @ORM\OneToMany(targetEntity="OgoneOrder", mappedBy="client", cascade={"all"})
+     */
+    private $orders;
+
+    /**
+     * @var OgoneAlias
+     *
+     * @ORM\OneToOne(targetEntity="OgoneAlias", mappedBy="client", cascade={"remove"})
+     */
+    private $alias;
+
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -510,5 +530,37 @@ class OgoneClient
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get speeches
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSpeeches()
+    {
+        return $this->speeches;
+    }
+
+    /**
+     * Add order
+     *
+     * @param OgoneOrder $order
+     */
+    public function addOrder(OgoneOrder $order)
+    {
+        $this->orders[] = $order;
+
+        $order->setClient($this);
+    }
+
+    /**
+     * Remove order
+     *
+     * @param OgoneOrder $order
+     */
+    public function removeOrder(OgoneOrder $order)
+    {
+        $this->orders->removeElement($order);
     }
 }

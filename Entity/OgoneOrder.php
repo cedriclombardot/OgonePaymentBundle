@@ -43,11 +43,11 @@ class OgoneOrder
     private $amountTva;
 
     /**
-     * @var integer
+     * @var OgoneClient
      *
-     * @ORM\Column(name="client_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="OgoneClient", inversedBy="orders")
      */
-    private $clientId;
+    private $client;
 
     /**
      * @var string
@@ -412,26 +412,26 @@ class OgoneOrder
     }
 
     /**
-     * Set clientId
+     * Set OgoneClient
      *
-     * @param integer $clientId
+     * @param OgoneClient $client
      * @return OgoneOrder
      */
-    public function setClientId($clientId)
+    public function setClient(OgoneClient $client)
     {
-        $this->clientId = $clientId;
+        $this->client = $client;
 
         return $this;
     }
 
     /**
-     * Get clientId
+     * Get OgoneClient
      *
-     * @return integer
+     * @return OgoneClient
      */
-    public function getClientId()
+    public function getClient()
     {
-        return $this->clientId;
+        return $this->client;
     }
 
     /**

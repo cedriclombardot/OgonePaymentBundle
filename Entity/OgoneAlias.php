@@ -22,11 +22,11 @@ class OgoneAlias
     private $id;
 
     /**
-     * @var integer
+     * @var OgoneClient
      *
-     * @ORM\Column(name="client_id", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="OgoneClient", inversedBy="alias")
      */
-    private $clientId;
+    private $client;
 
     /**
      * @var string
@@ -90,26 +90,26 @@ class OgoneAlias
     }
 
     /**
-     * Set clientId
+     * Set OgoneClient
      *
-     * @param integer $clientId
-     * @return OgoneAlias
+     * @param OgoneClient $client
+     * @return OgoneOrder
      */
-    public function setClientId($clientId)
+    public function setClient(OgoneClient $client)
     {
-        $this->clientId = $clientId;
+        $this->client = $client;
 
         return $this;
     }
 
     /**
-     * Get clientId
+     * Get OgoneClient
      *
-     * @return integer
+     * @return OgoneClient
      */
-    public function getClientId()
+    public function getClient()
     {
-        return $this->clientId;
+        return $this->client;
     }
 
     /**
