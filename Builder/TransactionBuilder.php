@@ -82,7 +82,7 @@ class TransactionBuilder
                 null,
                 null,
                 null,
-                $this->order->getOgoneClient()->getFullname(),
+                $this->order->getClient()->getFullname(),
                 null,
                 $this->order->getId(),
                 $this->configurationContainer->getAlias()

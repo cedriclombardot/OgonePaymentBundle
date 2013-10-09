@@ -9,9 +9,36 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ogone_alias")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class OgoneAlias
 {
+    /** enumerate fields */
+    const OPERATION = 'operation';
+    const STATUS = 'status';
+
+    /** The enumerated values for the operation field */
+    const OPERATION_BYMERCHANT = 'BYMERCHANT';
+    const OPERATION_BYPSP = 'BYPSP';
+
+    /** The enumerated values for the status field */
+    const STATUS_PENDING = 'PENDING';
+    const STATUS_ACTIVE = 'ACTIVE';
+    const STATUS_ERROR = 'ERROR';
+
+    /** The enumerated values for this table */
+    protected static $enumValueSets = array(
+        self::OPERATION => array(
+            self::OPERATION_BYMERCHANT,
+            self::OPERATION_BYPSP,
+        ),
+        self::STATUS => array(
+            self::STATUS_PENDING,
+            self::STATUS_ACTIVE,
+            self::STATUS_ERROR,
+        ),
+    );
+
     /**
      * @var integer
      *
@@ -59,7 +86,7 @@ class OgoneAlias
     /**
      * @var string
      *
-     * @ORM\Column(name="fileId", type="string", length=255, nullable=false)
+     * @ORM\Column(name="fileId", type="string", length=255, nullable=true)
      */
     private $fileid;
 
@@ -78,6 +105,11 @@ class OgoneAlias
     private $updatedAt;
 
 
+    /** @ORM\PrePersist */
+    public function onPrePersist()
+    {
+        $this->setUuid(uniqid('sf_'));
+    }
 
     /**
      * Get id
@@ -271,5 +303,30 @@ class OgoneAlias
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function toOgone()
+    {
+        $convertion = array(
+           'AliasOperation' => 'Operation',
+           'Alias'          => 'Uuid',
+           'AliasUsage'     => 'Name'
+        );
+
+        foreach ($convertion as $ogoneKey => $propelGetter) {
+            $convertion[$ogoneKey] = $this->{'get'.$propelGetter}();
+        }
+
+        return $convertion;
+    }
+
+    /**
+     * Gets the list of values for all ENUM columns
+     *
+     * @return array
+     */
+    public static function getValueSets()
+    {
+      return self::$enumValueSets;
     }
 }

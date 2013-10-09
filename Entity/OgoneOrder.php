@@ -328,7 +328,7 @@ class OgoneOrder
         }
 
         if ($this->getClient()) {
-               $convertion = array_merge($convertion, $this->getClient()->toOgone());
+            $convertion = array_merge($convertion, $this->getClient()->toOgone());
         }
 
         return $convertion;
