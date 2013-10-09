@@ -2,8 +2,8 @@
 
 namespace Cedriclombardot\OgonePaymentBundle\Builder;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-
 use Cedriclombardot\OgonePaymentBundle\Entity\OgoneOrder;
 use Cedriclombardot\OgonePaymentBundle\Entity\OgoneAlias;
 use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
@@ -16,13 +16,16 @@ class TransactionBuilder
 
     protected $batchTransactionManager;
 
+    protected $om;
+
     protected $order;
 
-    public function __construct(TransactionFormBuilder $transactionFormBuilder, ConfigurationContainer $configurationContainer, TransactionManager $batchTransactionManager)
+    public function __construct(TransactionFormBuilder $transactionFormBuilder, ConfigurationContainer $configurationContainer, TransactionManager $batchTransactionManager, ObjectManager $om)
     {
         $this->transactionFormBuilder  = $transactionFormBuilder;
         $this->configurationContainer  = $configurationContainer;
         $this->batchTransactionManager = $batchTransactionManager;
+        $this->om = $om;
         $this->order = new OgoneOrder();
     }
 
@@ -85,5 +88,13 @@ class TransactionBuilder
                 $this->configurationContainer->getAlias()
             )
         ;
+    }
+
+    public function save()
+    {
+        $this->om->persist($this->order);
+        $this->om->flush();
+
+        return $this;
     }
 }

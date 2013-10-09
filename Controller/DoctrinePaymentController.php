@@ -4,7 +4,6 @@ namespace Cedriclombardot\OgonePaymentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
 use Cedriclombardot\OgonePaymentBundle\Entity\OgoneClient;
 use Cedriclombardot\OgonePaymentBundle\Entity\OgoneAlias;
 use Cedriclombardot\OgonePaymentBundle\Entity\OgoneOrder;
@@ -13,7 +12,7 @@ class DoctrinePaymentController extends Controller
 {
     public function indexAction()
     {
-        $client = $this->getRepository('CedriclombardotOgonePaymentBundle:Client')->findOneBy(array(
+        $client = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneClient')->findOneBy(array(
             'email' => 'test@test.com'
         ));
 
@@ -29,6 +28,7 @@ class DoctrinePaymentController extends Controller
                 ->setClient($client)
                 ->setAmount(99)
             ->end()
+            ->save()
             ->configure()
                 ->setBgColor('#ffffff')
                 ->setAcceptUrl($this->generateUrl('ogone_payment_feedback', array(), true))
@@ -39,7 +39,15 @@ class DoctrinePaymentController extends Controller
             ->end()
         ;
 
+        // @todo: create alias
         if ($this->container->getParameter('ogone.use_aliases')) {
+            $alias = OgoneAliasQuery::create()
+                ->filterByOgoneClient($client)
+                ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
+                ->filterByName('ABONNEMENT')
+                ->findOneOrCreate()
+            ;
+
             $transaction->useAlias($alias);
         }
 

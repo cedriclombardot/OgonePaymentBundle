@@ -285,8 +285,6 @@ class OgoneOrder
 
     public function end()
     {
-        $this->save();
-
         $toReturn = $this->onEnd;
         $this->onEnd = null;
 
@@ -299,7 +297,7 @@ class OgoneOrder
            'orderId'    => 'Id',
            'amount'     => 'Amount',
            'amountHtva' => 'AmountHtva',
-           'UserId'     => 'ClientId',
+           'UserId'     => 'Client',
            'Com'        => 'Description',
            'Operation'  => 'Operation',
            'PM'         => 'PaymentMethod',
@@ -322,11 +320,15 @@ class OgoneOrder
         );
 
         foreach ($convertion as $ogoneKey => $propelGetter) {
-            $convertion[$ogoneKey] = $this->{'get'.$propelGetter}();
+            if ('Client' == $propelGetter) {
+                $convertion[$ogoneKey] = $this->getClient()->getId();
+            } else {
+                $convertion[$ogoneKey] = $this->{'get'.$propelGetter}();
+            }
         }
 
-        if ($this->getOgoneClient()) {
-               $convertion = array_merge($convertion, $this->getOgoneClient()->toOgone());
+        if ($this->getClient()) {
+               $convertion = array_merge($convertion, $this->getClient()->toOgone());
         }
 
         return $convertion;

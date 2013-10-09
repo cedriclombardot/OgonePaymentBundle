@@ -33,6 +33,7 @@
             <argument type="service" id="ogone.transaction_form_builder" />
             <argument type="service" id="ogone.configuration" />
             <argument type="service" id="ogone.batch_transaction_manager" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="ogone.transaction_form_builder" class="%ogone.transaction_form_builder.class%" public="false">

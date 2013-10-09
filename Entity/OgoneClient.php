@@ -563,4 +563,31 @@ class OgoneClient
     {
         $this->orders->removeElement($order);
     }
+
+    public function toOgone()
+    {
+        $convertion = array(
+           'UserId'        => 'Id',
+           'GENDER'        => 'Gender',
+           'CIVILITY'      => 'Civility',
+           'CN'            => 'Fullname',
+           'ECOM_BILLTO_POSTAL_NAME_FIRST'  => 'Firstname',
+           'ECOM_BILLTO_POSTAL_NAME_LAST'   => 'Name',
+           'EMAIL'         => 'Email',
+           'OWNERZIP'      => 'ZipCode',
+           'OWNERADDRESS'  => 'Address',
+           'OWNERADDRESS2' => 'Address2',
+           'OWNERCTY'      => 'City',
+           'OWNERTOWN'     => 'Town',
+           'OWNERTELNO'    => 'PhoneNumber',
+           'OWNERTELNO2'   => 'PhoneNumber2',
+           'ECOM_SHIPTO_DOB' => 'Birthdate',
+        );
+
+        foreach ($convertion as $ogoneKey => $propelGetter) {
+            $convertion[$ogoneKey] = $this->{'get'.$propelGetter}();
+        }
+
+        return $convertion;
+    }
 }
