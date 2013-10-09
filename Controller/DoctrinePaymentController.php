@@ -13,13 +13,14 @@ class DoctrinePaymentController extends Controller
     public function indexAction()
     {
         $client = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneClient')->findOneBy(array(
-            'email' => 'test@test.com'
+            'email' => 'test@test.com',
         ));
 
         if (!$client) {
             $client = new OgoneClient();
             $client->setEmail('test@test.com');
-            $this->getManager()->persist();
+
+            $this->getManager()->persist($client);
             $this->getManager()->flush();
         }
 
@@ -39,26 +40,32 @@ class DoctrinePaymentController extends Controller
             ->end()
         ;
 
-        // @todo: create alias
         if ($this->container->getParameter('ogone.use_aliases')) {
-            $alias = OgoneAliasQuery::create()
-                ->filterByOgoneClient($client)
-                ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
-                ->filterByName('ABONNEMENT')
-                ->findOneOrCreate()
-            ;
+            $alias = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneAlias')->findOneBy(array(
+                'client' => $client,
+                'operation' => OgoneAlias::OPERATION_BYMERCHANT,
+                'name' => 'ABONNEMENT',
+            ));
+
+            if (!$alias) {
+                $alias = new OgoneAlias();
+                $alias
+                    ->setClient($client)
+                    ->setOperation(OgoneAlias::OPERATION_BYMERCHANT)
+                    ->setStatus(OgoneAlias::STATUS_ACTIVE)
+                    ->setName('ABONNEMENT')
+                ;
+
+                $this->getManager()->persist($alias);
+                $this->getManager()->flush();
+            }
 
             $transaction->useAlias($alias);
         }
 
         $form = $transaction->getForm();
 
-        return $this->render(
-            'CedriclombardotOgonePaymentBundle:Payment:index.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return array('form' => $form->createView());
     }
 
     public function feedbackAction()
