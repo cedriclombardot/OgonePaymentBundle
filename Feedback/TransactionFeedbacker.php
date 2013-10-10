@@ -1,12 +1,12 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Feedback;
+namespace Pilot\OgonePaymentBundle\Feedback;
 
 use Symfony\Component\HttpFoundation\Request;
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrderQuery;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasQuery;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Propel\OgoneOrderQuery;
+use Pilot\OgonePaymentBundle\Propel\OgoneAliasQuery;
+use Pilot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 
 class TransactionFeedbacker
 {
@@ -38,7 +38,7 @@ class TransactionFeedbacker
                 }
             }
         }
-        
+
         unset($toSign["SHASIGN"]);
         ksort($toSign);
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Tests\Config;
+namespace Pilot\OgonePaymentBundle\Tests\Config;
 
-use Cedriclombardot\OgonePaymentBundle\Tests\TestCase;
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Tests\TestCase;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class ConfigurationContainerTest extends TestCase

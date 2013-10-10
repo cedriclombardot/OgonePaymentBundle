@@ -8,7 +8,7 @@ framework:
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     session:         ~
 
-cedriclombardot_ogone_payment:
+Pilot_ogone_payment:
     secret:
         shaInKey: Mysecretsig1875!?
         shaOutKey: Mysecretsig1875!?

@@ -1,11 +1,11 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Tests\Builder;
+namespace Pilot\OgonePaymentBundle\Tests\Builder;
 
-use Cedriclombardot\OgonePaymentBundle\Tests\TestCase;
-use Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder;
-use Cedriclombardot\OgonePaymentBundle\Config\SecureConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Tests\TestCase;
+use Pilot\OgonePaymentBundle\Builder\TransactionFormBuilder;
+use Pilot\OgonePaymentBundle\Config\SecureConfigurationContainer;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
 use Symfony\Component\Form\FormFactory;
 
 class TransactionFormBuilderTest extends TestCase

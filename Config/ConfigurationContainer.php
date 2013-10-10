@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Config;
+namespace Pilot\OgonePaymentBundle\Config;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 

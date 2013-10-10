@@ -1,17 +1,17 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Tests\Builder;
+namespace Pilot\OgonePaymentBundle\Tests\Builder;
 
-use Cedriclombardot\OgonePaymentBundle\Tests\TestCase;
-use Cedriclombardot\OgonePaymentBundle\Builder\TransactionBuilder;
-use Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder;
-use Cedriclombardot\OgonePaymentBundle\Config\SecureConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAlias;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrder;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
+use Pilot\OgonePaymentBundle\Tests\TestCase;
+use Pilot\OgonePaymentBundle\Builder\TransactionBuilder;
+use Pilot\OgonePaymentBundle\Builder\TransactionFormBuilder;
+use Pilot\OgonePaymentBundle\Config\SecureConfigurationContainer;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Propel\OgoneAlias;
+use Pilot\OgonePaymentBundle\Propel\OgoneOrder;
+use Pilot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 use Symfony\Component\Form\FormFactory;
-use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
+use Pilot\OgonePaymentBundle\Batch\TransactionManager;
 
 class TransactionBuilderTest extends TestCase
 {

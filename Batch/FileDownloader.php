@@ -1,8 +1,8 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Batch;
+namespace Pilot\OgonePaymentBundle\Batch;
 
-use Cedriclombardot\OgonePaymentBundle\File\OgoneDownloadedFile;
+use Pilot\OgonePaymentBundle\File\OgoneDownloadedFile;
 
 class FileDownloader extends BatchRequest
 {

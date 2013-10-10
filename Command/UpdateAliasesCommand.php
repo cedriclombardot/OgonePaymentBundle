@@ -1,15 +1,15 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Command;
+namespace Pilot\OgonePaymentBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasQuery;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAliasPeer;
+use Pilot\OgonePaymentBundle\Propel\OgoneAliasQuery;
+use Pilot\OgonePaymentBundle\Propel\OgoneAliasPeer;
 
-use Cedriclombardot\OgonePaymentBundle\Feedback\OgoneCodes;
+use Pilot\OgonePaymentBundle\Feedback\OgoneCodes;
 
 class UpdateAliasesCommand extends ContainerAwareCommand
 {

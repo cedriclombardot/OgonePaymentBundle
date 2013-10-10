@@ -1,10 +1,10 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Tests\Feedback;
+namespace Pilot\OgonePaymentBundle\Tests\Feedback;
 
-use Cedriclombardot\OgonePaymentBundle\Tests\TestCase;
-use Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker;
-use Cedriclombardot\OgonePaymentBundle\Config\SecureConfigurationContainer;
+use Pilot\OgonePaymentBundle\Tests\TestCase;
+use Pilot\OgonePaymentBundle\Feedback\TransactionFeedbacker;
+use Pilot\OgonePaymentBundle\Config\SecureConfigurationContainer;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransactionFeedbackerTest extends TestCase

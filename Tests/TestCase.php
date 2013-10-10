@@ -1,12 +1,12 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Tests;
+namespace Pilot\OgonePaymentBundle\Tests;
 
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
     static $kernel;
-    
+
     static $isBuilt = false;
 
     public function getContainer()
@@ -21,7 +21,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
         return self::$kernel;
     }
-    
+
 }
 
 
@@ -37,7 +37,7 @@ class MyKernel extends \Symfony\Component\HttpKernel\Kernel
             new \Propel\PropelBundle\PropelBundle(),
 
             // Ogone
-            new \Cedriclombardot\OgonePaymentBundle\CedriclombardotOgonePaymentBundle(),
+            new \Pilot\OgonePaymentBundle\PilotOgonePaymentBundle(),
 
         );
     }

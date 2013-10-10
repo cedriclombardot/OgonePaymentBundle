@@ -1,12 +1,12 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Builder;
+namespace Pilot\OgonePaymentBundle\Builder;
 
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrder;
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneAlias;
-use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
+use Doctrine\Common\Persistence\ObjectManager;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Entity\OgoneOrder;
+use Pilot\OgonePaymentBundle\Entity\OgoneAlias;
+use Pilot\OgonePaymentBundle\Batch\TransactionManager;
 
 class TransactionBuilder
 {
@@ -16,13 +16,16 @@ class TransactionBuilder
 
     protected $batchTransactionManager;
 
+    protected $om;
+
     protected $order;
 
-    public function __construct(TransactionFormBuilder $transactionFormBuilder, ConfigurationContainer $configurationContainer, TransactionManager $batchTransactionManager)
+    public function __construct(TransactionFormBuilder $transactionFormBuilder, ConfigurationContainer $configurationContainer, TransactionManager $batchTransactionManager, ObjectManager $om)
     {
         $this->transactionFormBuilder  = $transactionFormBuilder;
         $this->configurationContainer  = $configurationContainer;
         $this->batchTransactionManager = $batchTransactionManager;
+        $this->om = $om;
         $this->order = new OgoneOrder();
     }
 
@@ -45,10 +48,12 @@ class TransactionBuilder
 
     public function getForm()
     {
-        return $this->prepareTransaction()
-                    ->transactionFormBuilder
-                    ->build($this->configurationContainer)
-                    ->getForm();
+        return $this
+            ->prepareTransaction()
+            ->transactionFormBuilder
+            ->build($this->configurationContainer)
+            ->getForm()
+        ;
     }
 
     protected function prepareTransaction()
@@ -72,16 +77,24 @@ class TransactionBuilder
     public function getBatchTransactionManagerCsvRow()
     {
         return $this->batchTransactionManager
-                    ->getSaleCsvRow(
-                        $this->order->getAmount(),
-                        null,
-                        null,
-                        null,
-                        $this->order->getOgoneClient()->getFullname(),
-                        null,
-                        $this->order->getId(),
-                        $this->configurationContainer->getAlias()
-                );
+            ->getSaleCsvRow(
+                $this->order->getAmount(),
+                null,
+                null,
+                null,
+                $this->order->getClient()->getFullname(),
+                null,
+                $this->order->getId(),
+                $this->configurationContainer->getAlias()
+            )
+        ;
     }
 
+    public function save()
+    {
+        $this->om->persist($this->order);
+        $this->om->flush();
+
+        return $this;
+    }
 }

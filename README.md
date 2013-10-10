@@ -1,4 +1,8 @@
-# Ogone payment bundle, help you to make payment transactions with ogone and Symfony2 ![project status](http://stillmaintained.com/cedriclombardot/OgonePaymentBundle.png)# ![build status](https://secure.travis-ci.org/cedriclombardot/OgonePaymentBundle.png)#
+# Ogone payment bundle, [ogone](http://ogone.com)
+
+Doctrine port of [Pilot/OgonePaymentBundle](https://github.com/Pilot/OgonePaymentBundle)
+
+[build status](https://secure.travis-ci.org/pilot/OgonePaymentBundle.png)
 
 ## Features
 
@@ -7,9 +11,9 @@
 * Feedback managment
 * Alias managment
 
-## Comming
+## Todo
 
-* Batch operations
+* make part of original bundle with doctrine ORM option
 
 ## Setup
 
@@ -17,22 +21,22 @@ Add in your composer.json :
 
 ```
 "require": {
-   "cedriclombardot/ogone-payment-bundle": "dev-master"
+   "pilot/ogone-payment-bundle": "dev-master"
 }
 ```
 
 Configure your kernel
 
-``` php
+```php
 $bundles = array(
-    new Cedriclombardot\OgonePaymentBundle\CedriclombardotOgonePaymentBundle(),
+    new Pilot\OgonePaymentBundle\PilotOgonePaymentBundle(),
 );
 ```
 
 Configure ogone in config.yml
 
-``` yaml
-cedriclombardot_ogone_payment:
+```yaml
+pilot_ogone_payment:
     secret:
         shaInKey: Mysecretsig1875!?
         shaOutKey: Mysecretsig1875!?
@@ -54,45 +58,55 @@ cedriclombardot_ogone_payment:
 
 ## Creation of a transaction
 
-In a controller
+In the controller
 
-``` php
-<?php
+```php
+    public function indexAction()
+    {
+        $client = $this->getRepository('PilotOgonePaymentBundle:OgoneClient')->findOneBy(array(
+            'email' => 'test@test.com',
+        ));
 
-$client = OgoneClientQuery::create()
-                       ->filterByEmail('test@test.com')
-                       ->findOneOrCreate();
-$client->save();
+        if (!$client) {
+            $client = new OgoneClient();
+            $client->setEmail('test@test.com');
 
-$transaction = $this->get('ogone.transaction_builder')
-                    ->order()
-                        ->setClient($client)
-                        ->setAmount(100)
-                    ->end()
-                    ->configure()
-                        ->setBgColor("red")
-                        ->setAcceptUrl($this->generateUrl('ogone_payment_feedback', array(), true))
-                        ->setDeclineUrl($this->generateUrl('ogone_payment_feedback', array(), true))
-                        ->setExceptionUrl($this->generateUrl('ogone_payment_feedback', array(), true))
-                        ->setCancelUrl($this->generateUrl('ogone_payment_feedback', array(), true))
-                        ->setBackUrl($this->generateUrl('ogone_payment_feedback', array(), true))
-                    ->end()
-                    ;
-$form = $transaction->getForm();
+            $this->getManager()->persist($client);
+            $this->getManager()->flush();
+        }
 
-return $this->render(
-    'CedriclombardotOgonePaymentBundle:Payment:index.html.twig',
-    array(
-        'form' => $form->createView(),
-    )
-);
+        $transaction = $this->get('ogone.transaction_builder')
+            ->order()
+                ->setClient($client)
+                ->setAmount(99)
+            ->end()
+            ->configure()
+                ->setBgColor('#ffffff')
+                ->setAcceptUrl($this->generateUrl('ogone_payment_feedback', array(), true))
+                ->setDeclineUrl($this->generateUrl('ogone_payment_feedback', array(), true))
+                ->setExceptionUrl($this->generateUrl('ogone_payment_feedback', array(), true))
+                ->setCancelUrl($this->generateUrl('ogone_payment_feedback', array(), true))
+                ->setBackUrl($this->generateUrl('ogone_payment_feedback', array(), true))
+            ->end()
+        ;
 
+        $transaction->save();
+
+        $form = $transaction->getForm();
+
+        return $this->render(
+            'PilotOgonePaymentBundle:Payment:index.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
+    }
 ```
 
 
-And the feedback :
+And the feedback:
 
-``` php
+```php
 <?php
     public function feedbackAction()
     {
@@ -103,7 +117,7 @@ And the feedback :
         $this->get('ogone.feedbacker')->updateOrder();
 
         return $this->render(
-            'CedriclombardotOgonePaymentBundle:Payment:feedback.html.twig'
+            'PilotOgonePaymentBundle:Payment:feedback.html.twig'
         );
     }
 
@@ -111,42 +125,52 @@ And the feedback :
 
 ## Alias managment
 
-You have Ogone premium account with alias option :
+You have Ogone premium account with alias option:
 
-Edit config.yml
+Update `config.yml`
 
-``` yaml
-cedriclombardot_ogone_payment:
+```yaml
+pilot_ogone_payment:
     general:
         use_aliases: true
 ```
+
 In your transaction controller
 
 ``` php
 // Client recuperation HERE
 
-// Alias creation
-if ($this->container->getParameter('ogone.use_aliases')) {
-    $alias = OgoneAliasQuery::create()
-               ->filterByOgoneClient($client)
-               ->filterByOperation(OgoneAliasPeer::OPERATION_BYMERCHANT)
-               ->filterByName('ABONNEMENT')
-               ->findOneOrCreate();
-
-   $alias->setLabel('Your abonnement');
-   $alias->save();
-}
-
 // Transaction creation HERE
 
+$transaction->save();
+
 if ($this->container->getParameter('ogone.use_aliases')) {
+    $alias = $this->getRepository('PilotOgonePaymentBundle:OgoneAlias')->findOneBy(array(
+        'client' => $client,
+        'operation' => OgoneAlias::OPERATION_BYMERCHANT,
+        'name' => 'ABONNEMENT',
+    ));
+
+    if (!$alias) {
+        $alias = new OgoneAlias();
+        $alias
+            ->setClient($client)
+            ->setOperation(OgoneAlias::OPERATION_BYMERCHANT)
+            ->setStatus(OgoneAlias::STATUS_ACTIVE)
+            ->setName('ABONNEMENT')
+        ;
+
+        $this->getManager()->persist($alias);
+        $this->getManager()->flush();
+    }
+
     $transaction->useAlias($alias);
 }
 
 $form = $transaction->getForm();
 
-// call the view
+// render the view
 ```
 
-See a complete controller implementation here [https://github.com/cedriclombardot/OgonePaymentBundle/blob/master/Controller/PaymentController.php](https://github.com/cedriclombardot/OgonePaymentBundle/blob/master/Controller/PaymentController.php)
+See a complete controller implementation here [https://github.com/pilot/OgonePaymentBundle/blob/master/Controller/PaymentController.php](https://github.com/pilot/OgonePaymentBundle/blob/master/Controller/PaymentController.php)
 

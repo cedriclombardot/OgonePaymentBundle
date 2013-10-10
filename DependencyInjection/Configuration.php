@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\DependencyInjection;
+namespace Pilot\OgonePaymentBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

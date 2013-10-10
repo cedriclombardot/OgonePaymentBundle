@@ -1,10 +1,10 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Batch;
+namespace Pilot\OgonePaymentBundle\Batch;
 
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
 
-abstract class BatchManager
+abstract class  BatchManager
 {
     protected $configurationContainer;
     protected $batchRequest;
