@@ -1,18 +1,18 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Controller;
+namespace Pilot\OgonePaymentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Cedriclombardot\OgonePaymentBundle\Entity\OgoneClient;
-use Cedriclombardot\OgonePaymentBundle\Entity\OgoneAlias;
-use Cedriclombardot\OgonePaymentBundle\Entity\OgoneOrder;
+use Pilot\OgonePaymentBundle\Entity\OgoneClient;
+use Pilot\OgonePaymentBundle\Entity\OgoneAlias;
+use Pilot\OgonePaymentBundle\Entity\OgoneOrder;
 
-class DoctrinePaymentController extends Controller
+class ExamplePaymentController extends Controller
 {
     public function indexAction()
     {
-        $client = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneClient')->findOneBy(array(
+        $client = $this->getRepository('PilotOgonePaymentBundle:OgoneClient')->findOneBy(array(
             'email' => 'test@test.com',
         ));
 
@@ -42,7 +42,7 @@ class DoctrinePaymentController extends Controller
         $transaction->save();
 
         if ($this->container->getParameter('ogone.use_aliases')) {
-            $alias = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneAlias')->findOneBy(array(
+            $alias = $this->getRepository('PilotOgonePaymentBundle:OgoneAlias')->findOneBy(array(
                 'client' => $client,
                 'operation' => OgoneAlias::OPERATION_BYMERCHANT,
                 'name' => 'ABONNEMENT',
@@ -67,7 +67,7 @@ class DoctrinePaymentController extends Controller
         $form = $transaction->getForm();
 
         return $this->render(
-            'CedriclombardotOgonePaymentBundle:Payment:index.html.twig',
+            'PilotOgonePaymentBundle:Payment:index.html.twig',
             array(
                 'form' => $form->createView(),
             )
@@ -89,7 +89,7 @@ class DoctrinePaymentController extends Controller
         }
 
         return $this->render(
-            'CedriclombardotOgonePaymentBundle:Payment:feedback.html.twig'
+            'PilotOgonePaymentBundle:Payment:feedback.html.twig'
         );
     }
 

@@ -1,6 +1,6 @@
 # Ogone payment bundle, [ogone](http://ogone.com)
 
-Doctrine port of [cedriclombardot/OgonePaymentBundle](https://github.com/cedriclombardot/OgonePaymentBundle)
+Doctrine port of [Pilot/OgonePaymentBundle](https://github.com/Pilot/OgonePaymentBundle)
 
 [build status](https://secure.travis-ci.org/pilot/OgonePaymentBundle.png)
 
@@ -63,7 +63,7 @@ In the controller
 ```php
     public function indexAction()
     {
-        $client = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneClient')->findOneBy(array(
+        $client = $this->getRepository('PilotOgonePaymentBundle:OgoneClient')->findOneBy(array(
             'email' => 'test@test.com',
         ));
 
@@ -145,7 +145,7 @@ In your transaction controller
 $transaction->save();
 
 if ($this->container->getParameter('ogone.use_aliases')) {
-    $alias = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneAlias')->findOneBy(array(
+    $alias = $this->getRepository('PilotOgonePaymentBundle:OgoneAlias')->findOneBy(array(
         'client' => $client,
         'operation' => OgoneAlias::OPERATION_BYMERCHANT,
         'name' => 'ABONNEMENT',

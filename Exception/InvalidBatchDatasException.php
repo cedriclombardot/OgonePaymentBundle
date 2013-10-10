@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Exception;
+namespace Pilot\OgonePaymentBundle\Exception;
 
 class InvalidBatchDatasException extends \InvalidArgumentException
 {

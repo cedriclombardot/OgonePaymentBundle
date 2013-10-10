@@ -1,20 +1,20 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Tests\Batch;
+namespace Pilot\OgonePaymentBundle\Tests\Batch;
 
-use Cedriclombardot\OgonePaymentBundle\Tests\TestCase;
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
-use Cedriclombardot\OgonePaymentBundle\Batch\BatchRequest;
+use Pilot\OgonePaymentBundle\Tests\TestCase;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Batch\TransactionManager;
+use Pilot\OgonePaymentBundle\Batch\BatchRequest;
 
 class TransactionManagerTest extends TestCase
 {
     public function testBuildAliasCSVRow()
     {
         $transactionManager = new TransactionManagerMock(new ConfigurationContainer(array('PSPID' => 'MyShop', 'CURRENCY' => 'EUR' )), new BatchRequest('test', $this->getContainer()->get('ogone.configuration'), $this->getContainer()->get('ogone.secure_configuration')));
-        
+
         $csv = $transactionManager->buildTransactionCSVRow(
-            TransactionManagerMock::OPERATION_RES, 
+            TransactionManagerMock::OPERATION_RES,
             10,
             'VISA',
             '4111111111111111',

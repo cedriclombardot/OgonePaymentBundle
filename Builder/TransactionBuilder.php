@@ -1,12 +1,12 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Builder;
+namespace Pilot\OgonePaymentBundle\Builder;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Entity\OgoneOrder;
-use Cedriclombardot\OgonePaymentBundle\Entity\OgoneAlias;
-use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Entity\OgoneOrder;
+use Pilot\OgonePaymentBundle\Entity\OgoneAlias;
+use Pilot\OgonePaymentBundle\Batch\TransactionManager;
 
 class TransactionBuilder
 {

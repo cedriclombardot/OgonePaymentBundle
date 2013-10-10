@@ -1,8 +1,8 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\File;
+namespace Pilot\OgonePaymentBundle\File;
 
-use Cedriclombardot\OgonePaymentBundle\Propel\OgoneOrderQuery;
+use Pilot\OgonePaymentBundle\Propel\OgoneOrderQuery;
 
 class OgoneDownloadedPayment
 {
@@ -31,7 +31,7 @@ class OgoneDownloadedPayment
     public function isPayed()
     {
         return $this->getStatus() == self::PAY_STATUS_OK;
-    } 
+    }
 
     public function isError()
     {

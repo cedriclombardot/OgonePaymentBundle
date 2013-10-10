@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\DependencyInjection;
+namespace Pilot\OgonePaymentBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
-class CedriclombardotOgonePaymentExtension extends Extension
+class PilotOgonePaymentExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -37,6 +37,6 @@ class CedriclombardotOgonePaymentExtension extends Extension
 
     public function getAlias()
     {
-        return 'cedriclombardot_ogone_payment';
+        return 'pilot_ogone_payment';
     }
 }

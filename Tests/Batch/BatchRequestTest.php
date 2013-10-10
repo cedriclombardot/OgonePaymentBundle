@@ -1,9 +1,9 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Tests\Batch;
+namespace Pilot\OgonePaymentBundle\Tests\Batch;
 
-use Cedriclombardot\OgonePaymentBundle\Tests\TestCase;
-use Cedriclombardot\OgonePaymentBundle\Batch\BatchRequest;
+use Pilot\OgonePaymentBundle\Tests\TestCase;
+use Pilot\OgonePaymentBundle\Batch\BatchRequest;
 
 class BatchRequestTest extends TestCase
 {

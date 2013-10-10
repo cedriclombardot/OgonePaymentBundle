@@ -1,8 +1,8 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Builder;
+namespace Pilot\OgonePaymentBundle\Builder;
 
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
 
 class TransactionFormBuilder
 {
@@ -17,8 +17,7 @@ class TransactionFormBuilder
     public function __construct(\Symfony\Component\Form\FormFactoryInterface $formFactory, ConfigurationContainer $secureConfigurationContainer)
     {
         $this->formFactory = $formFactory;
-        $this->form = $this->formFactory
-                           ->createNamedBuilder(null, 'form');
+        $this->form = $this->formFactory->createNamedBuilder(null, 'form');
 
         $this->secureConfigurationContainer = $secureConfigurationContainer;
     }

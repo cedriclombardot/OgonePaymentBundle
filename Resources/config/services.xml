@@ -5,16 +5,16 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="ogone.configuration.class">Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer</parameter>
-        <parameter key="ogone.secure_configuration.class">Cedriclombardot\OgonePaymentBundle\Config\SecureConfigurationContainer</parameter>
-        <parameter key="ogone.transaction_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionBuilder</parameter>
-        <parameter key="ogone.transaction_form_builder.class">Cedriclombardot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
-        <parameter key="ogone.feedbacker.class">Cedriclombardot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
-        <parameter key="ogone.batch_request.class">Cedriclombardot\OgonePaymentBundle\Batch\BatchRequest</parameter>
-        <parameter key="ogone.file_downloader.class">Cedriclombardot\OgonePaymentBundle\Batch\FileDownloader</parameter>
-        <parameter key="ogone.batch_alias_manager.class">Cedriclombardot\OgonePaymentBundle\Batch\AliasManager</parameter>
-        <parameter key="ogone.batch_transaction_manager.class">Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager</parameter>
-        <parameter key="ogone.alias_form.class">Cedriclombardot\OgonePaymentBundle\Form\AliasType</parameter>
+        <parameter key="ogone.configuration.class">Pilot\OgonePaymentBundle\Config\ConfigurationContainer</parameter>
+        <parameter key="ogone.secure_configuration.class">Pilot\OgonePaymentBundle\Config\SecureConfigurationContainer</parameter>
+        <parameter key="ogone.transaction_builder.class">Pilot\OgonePaymentBundle\Builder\TransactionBuilder</parameter>
+        <parameter key="ogone.transaction_form_builder.class">Pilot\OgonePaymentBundle\Builder\TransactionFormBuilder</parameter>
+        <parameter key="ogone.feedbacker.class">Pilot\OgonePaymentBundle\Feedback\TransactionFeedbacker</parameter>
+        <parameter key="ogone.batch_request.class">Pilot\OgonePaymentBundle\Batch\BatchRequest</parameter>
+        <parameter key="ogone.file_downloader.class">Pilot\OgonePaymentBundle\Batch\FileDownloader</parameter>
+        <parameter key="ogone.batch_alias_manager.class">Pilot\OgonePaymentBundle\Batch\AliasManager</parameter>
+        <parameter key="ogone.batch_transaction_manager.class">Pilot\OgonePaymentBundle\Batch\TransactionManager</parameter>
+        <parameter key="ogone.alias_form.class">Pilot\OgonePaymentBundle\Form\AliasType</parameter>
         <parameter key="ogone.template_route">ogone_template</parameter>
     </parameters>
 

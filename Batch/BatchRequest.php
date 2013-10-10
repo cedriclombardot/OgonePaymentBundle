@@ -1,10 +1,10 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Batch;
+namespace Pilot\OgonePaymentBundle\Batch;
 
-use Cedriclombardot\OgonePaymentBundle\Config\ConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Config\SecureConfigurationContainer;
-use Cedriclombardot\OgonePaymentBundle\Exception\InvalidBatchDatasException;
+use Pilot\OgonePaymentBundle\Config\ConfigurationContainer;
+use Pilot\OgonePaymentBundle\Config\SecureConfigurationContainer;
+use Pilot\OgonePaymentBundle\Exception\InvalidBatchDatasException;
 
 class BatchRequest
 {

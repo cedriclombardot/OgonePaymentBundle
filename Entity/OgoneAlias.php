@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Entity;
+namespace Pilot\OgonePaymentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

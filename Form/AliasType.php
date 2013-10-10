@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Form;
+namespace Pilot\OgonePaymentBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +9,7 @@ use Symfony\Component\Form\CallbackValidator;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Translation\TranslatorInterface;
-use Cedriclombardot\OgonePaymentBundle\Batch\TransactionManager;
+use Pilot\OgonePaymentBundle\Batch\TransactionManager;
 
 class AliasType extends AbstractType
 {
@@ -29,27 +29,28 @@ class AliasType extends AbstractType
         $months = array('01','02','03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
         $years  = range(date('y'), date('y') + 4 );
 
-        $builder->add('card_brand', 'choice', array(
-            'choices'  => array_combine($this->brands, $this->brands),
-            'required' => true,
-        ))
-        ->add('card_number', 'text', array(
-            'required' => true,
-        ))
-        ->add('card_name', 'text', array(
-            'required' => true,
-        ))
-        ->add('card_cvv', 'number', array(
-            'required' => true,
-        ))
-        ->add('date_month', 'choice', array(
-            'choices'  => array_combine($months, $months),
-            'required' => true,
-        ))
-        ->add('date_year', 'choice', array(
-            'choices'  => array_combine($years, $years),
-            'required' => true,
-        ))
+        $builder
+            ->add('card_brand', 'choice', array(
+                'choices'  => array_combine($this->brands, $this->brands),
+                'required' => true,
+            ))
+            ->add('card_number', 'text', array(
+                'required' => true,
+            ))
+            ->add('card_name', 'text', array(
+                'required' => true,
+            ))
+            ->add('card_cvv', 'number', array(
+                'required' => true,
+            ))
+            ->add('date_month', 'choice', array(
+                'choices'  => array_combine($months, $months),
+                'required' => true,
+            ))
+            ->add('date_year', 'choice', array(
+                'choices'  => array_combine($years, $years),
+                'required' => true,
+            ))
         ;
 
         $translator = $this->translator;
@@ -71,16 +72,17 @@ class AliasType extends AbstractType
             // Check card using ogone
             try {
                 $authorisation = $transactionManager
-                                ->checkAuthorisation(
-                                    0,
-                                    $form->get('card_brand')->getData(),
-                                    $form->get('card_number')->getData(),
-                                    $form->get('date_month')->getData().$form->get('date_year')->getData(),
-                                    $form->get('card_name')->getData(),
-                                    $form->get('card_cvv')->getData(),
-                                    null // No order id
-                                );
-            } catch (\Cedriclombardot\OgonePaymentBundle\Exception\InvalidBatchDatasException $e) {
+                    ->checkAuthorisation(
+                        0,
+                        $form->get('card_brand')->getData(),
+                        $form->get('card_number')->getData(),
+                        $form->get('date_month')->getData().$form->get('date_year')->getData(),
+                        $form->get('card_name')->getData(),
+                        $form->get('card_cvv')->getData(),
+                        null // No order id
+                    )
+                ;
+            } catch (\Pilot\OgonePaymentBundle\Exception\InvalidBatchDatasException $e) {
 
                 foreach ($e->getErrors() as $error) {
                     $code = $error->xpath('NCERROR');

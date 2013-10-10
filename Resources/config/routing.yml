@@ -1,15 +1,11 @@
 ogone_payment_form:
     pattern: /ogone/payment
-    defaults: { _controller: CedriclombardotOgonePaymentBundle:DoctrinePayment:index }
+    defaults: { _controller: PilotOgonePaymentBundle:DoctrinePayment:index }
 
 ogone_payment_feedback:
     pattern: /ogone/payment-feedback
-    defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:feedback }
+    defaults: { _controller: PilotOgonePaymentBundle:Payment:feedback }
 
 ogone_template:
     pattern: /ogone/template/{twigPath}
-    defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:renderTemplate }
-
-ogone_batchAlias:
-    pattern: /ogone/batchAlias
-    defaults: { _controller: CedriclombardotOgonePaymentBundle:Payment:batchAlias }
+    defaults: { _controller: PilotOgonePaymentBundle:Payment:renderTemplate }

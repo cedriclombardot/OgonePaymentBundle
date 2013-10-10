@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\File;
+namespace Pilot\OgonePaymentBundle\File;
 
 use Buzz\Message\Response;
 
@@ -39,7 +39,7 @@ class OgoneDownloadedFile
     {
         return call_user_func_array(array($this->getResponse(), $method), $args);
     }
-    
+
     protected function getDatas($xpath)
     {
         $xml = new \SimpleXMLElement($this->getContent());

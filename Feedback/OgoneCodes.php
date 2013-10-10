@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Feedback;
+namespace Pilot\OgonePaymentBundle\Feedback;
 
 class OgoneCodes
 {
@@ -23,11 +23,11 @@ class OgoneCodes
 
     public static function isRefused($status)
     {
-        return in_array($status, array(self::PAY_STATUS_REFUSE));   
+        return in_array($status, array(self::PAY_STATUS_REFUSE));
     }
 
     public static function isUncertain($status)
     {
-        return in_array($status, array(self::PAY_STATUS_NOT_SURE, self::PAY_STATUS_PAY_NOT_SURE));   
+        return in_array($status, array(self::PAY_STATUS_NOT_SURE, self::PAY_STATUS_PAY_NOT_SURE));
     }
 }

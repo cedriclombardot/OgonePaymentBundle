@@ -1,6 +1,6 @@
 <?php
 
-namespace Cedriclombardot\OgonePaymentBundle\Batch;
+namespace Pilot\OgonePaymentBundle\Batch;
 
 class TransactionManager extends BatchManager
 {
