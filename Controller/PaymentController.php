@@ -8,7 +8,7 @@ use Pilot\OgonePaymentBundle\Entity\OgoneClient;
 use Pilot\OgonePaymentBundle\Entity\OgoneAlias;
 use Pilot\OgonePaymentBundle\Entity\OgoneOrder;
 
-class ExamplePaymentController extends Controller
+class PaymentController extends Controller
 {
     public function indexAction()
     {
