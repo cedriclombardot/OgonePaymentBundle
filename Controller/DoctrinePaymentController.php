@@ -29,7 +29,6 @@ class DoctrinePaymentController extends Controller
                 ->setClient($client)
                 ->setAmount(99)
             ->end()
-            ->save()
             ->configure()
                 ->setBgColor('#ffffff')
                 ->setAcceptUrl($this->generateUrl('ogone_payment_feedback', array(), true))
@@ -39,6 +38,8 @@ class DoctrinePaymentController extends Controller
                 ->setBackUrl($this->generateUrl('ogone_payment_feedback', array(), true))
             ->end()
         ;
+
+        $transaction->save();
 
         if ($this->container->getParameter('ogone.use_aliases')) {
             $alias = $this->getRepository('CedriclombardotOgonePaymentBundle:OgoneAlias')->findOneBy(array(
@@ -65,7 +66,12 @@ class DoctrinePaymentController extends Controller
 
         $form = $transaction->getForm();
 
-        return array('form' => $form->createView());
+        return $this->render(
+            'CedriclombardotOgonePaymentBundle:Payment:index.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
     }
 
     public function feedbackAction()
